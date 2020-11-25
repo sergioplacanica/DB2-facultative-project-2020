@@ -3,7 +3,12 @@
 	<persistence-unit name="QuestionnaireEJB">
 		<jta-data-source>QuestionnaireEJB</jta-data-source>
 		<class>model.Accesstime</class>
+		<class>model.Answer</class>
+		<class>model.Marketingquestion</class>
+		<class>model.Offensiveword</class>
 		<class>model.Product</class>
+		<class>model.Questionnaire</class>
+		<class>model.Review</class>
 		<class>model.User</class>
 	</persistence-unit>
 </persistence>

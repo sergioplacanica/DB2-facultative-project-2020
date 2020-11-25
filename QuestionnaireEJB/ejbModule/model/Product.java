@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -14,12 +15,23 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ProductID")
 	private int productID;
 
+	@Column(name="Image")
 	private String image;
 
+	@Column(name="Name")
 	private String name;
+
+	//bi-directional many-to-one association to Questionnaire
+	@OneToMany(mappedBy="product")
+	private List<Questionnaire> questionnaires;
+
+	//bi-directional many-to-one association to Review
+	@OneToMany(mappedBy="product")
+	private List<Review> reviews;
 
 	public Product() {
 	}
@@ -46,6 +58,50 @@ public class Product implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<Questionnaire> getQuestionnaires() {
+		return this.questionnaires;
+	}
+
+	public void setQuestionnaires(List<Questionnaire> questionnaires) {
+		this.questionnaires = questionnaires;
+	}
+
+	public Questionnaire addQuestionnaire(Questionnaire questionnaire) {
+		getQuestionnaires().add(questionnaire);
+		questionnaire.setProduct(this);
+
+		return questionnaire;
+	}
+
+	public Questionnaire removeQuestionnaire(Questionnaire questionnaire) {
+		getQuestionnaires().remove(questionnaire);
+		questionnaire.setProduct(null);
+
+		return questionnaire;
+	}
+
+	public List<Review> getReviews() {
+		return this.reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public Review addReview(Review review) {
+		getReviews().add(review);
+		review.setProduct(this);
+
+		return review;
+	}
+
+	public Review removeReview(Review review) {
+		getReviews().remove(review);
+		review.setProduct(null);
+
+		return review;
 	}
 
 }

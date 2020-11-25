@@ -15,14 +15,15 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="UserID")
 	private int userID;
 
 	@Column(name="Admin")
-	private byte admin;
+	private Object admin;
 
 	@Column(name="Blocked")
-	private byte blocked;
+	private Object blocked;
 
 	@Column(name="Email")
 	private String email;
@@ -37,6 +38,18 @@ public class User implements Serializable {
 	@ManyToMany(mappedBy="users")
 	private List<Accesstime> accesstimes;
 
+	//bi-directional many-to-one association to Answer
+	@OneToMany(mappedBy="user")
+	private List<Answer> answers;
+
+	//bi-directional many-to-one association to Questionnaire
+	@OneToMany(mappedBy="user")
+	private List<Questionnaire> questionnaires;
+
+	//bi-directional many-to-one association to Review
+	@OneToMany(mappedBy="user")
+	private List<Review> reviews;
+
 	public User() {
 	}
 
@@ -48,19 +61,19 @@ public class User implements Serializable {
 		this.userID = userID;
 	}
 
-	public byte getAdmin() {
+	public Object getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(byte admin) {
+	public void setAdmin(Object admin) {
 		this.admin = admin;
 	}
 
-	public byte getBlocked() {
+	public Object getBlocked() {
 		return this.blocked;
 	}
 
-	public void setBlocked(byte blocked) {
+	public void setBlocked(Object blocked) {
 		this.blocked = blocked;
 	}
 
@@ -94,6 +107,72 @@ public class User implements Serializable {
 
 	public void setAccesstimes(List<Accesstime> accesstimes) {
 		this.accesstimes = accesstimes;
+	}
+
+	public List<Answer> getAnswers() {
+		return this.answers;
+	}
+
+	public void setAnswers(List<Answer> answers) {
+		this.answers = answers;
+	}
+
+	public Answer addAnswer(Answer answer) {
+		getAnswers().add(answer);
+		answer.setUser(this);
+
+		return answer;
+	}
+
+	public Answer removeAnswer(Answer answer) {
+		getAnswers().remove(answer);
+		answer.setUser(null);
+
+		return answer;
+	}
+
+	public List<Questionnaire> getQuestionnaires() {
+		return this.questionnaires;
+	}
+
+	public void setQuestionnaires(List<Questionnaire> questionnaires) {
+		this.questionnaires = questionnaires;
+	}
+
+	public Questionnaire addQuestionnaire(Questionnaire questionnaire) {
+		getQuestionnaires().add(questionnaire);
+		questionnaire.setUser(this);
+
+		return questionnaire;
+	}
+
+	public Questionnaire removeQuestionnaire(Questionnaire questionnaire) {
+		getQuestionnaires().remove(questionnaire);
+		questionnaire.setUser(null);
+
+		return questionnaire;
+	}
+
+	public List<Review> getReviews() {
+		return this.reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public Review addReview(Review review) {
+		getReviews().add(review);
+		review.setUser(this);
+
+		return review;
+	}
+
+	public Review removeReview(Review review) {
+		getReviews().remove(review);
+		review.setUser(null);
+
+		return review;
 	}
 
 }
