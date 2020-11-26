@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -14,12 +15,15 @@ import java.util.List;
 public class Questionnaire implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="QuestionnaireID")
-	private int questionnaireID;
+	@EmbeddedId
+	private QuestionnairePK id;
 
 	@Column(name="Age")
 	private byte age;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="Date")
+	private Date date;
 
 	@Column(name="Expertise_level")
 	private String expertise_level;
@@ -27,33 +31,29 @@ public class Questionnaire implements Serializable {
 	@Column(name="Sex")
 	private String sex;
 
-	//bi-directional many-to-one association to Answer
+	//bi-directional many-to-one association to Contain
 	@OneToMany(mappedBy="questionnaire")
-	private List<Answer> answers;
-
-	//bi-directional many-to-many association to Marketingquestion
-	@ManyToMany(mappedBy="questionnaires")
-	private List<Marketingquestion> marketingquestions;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="UserID")
-	private User user;
+	private List<Contain> contains;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
 	@JoinColumn(name="ProductID")
 	private Product product;
 
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="UserID")
+	private User user;
+
 	public Questionnaire() {
 	}
 
-	public int getQuestionnaireID() {
-		return this.questionnaireID;
+	public QuestionnairePK getId() {
+		return this.id;
 	}
 
-	public void setQuestionnaireID(int questionnaireID) {
-		this.questionnaireID = questionnaireID;
+	public void setId(QuestionnairePK id) {
+		this.id = id;
 	}
 
 	public byte getAge() {
@@ -62,6 +62,14 @@ public class Questionnaire implements Serializable {
 
 	public void setAge(byte age) {
 		this.age = age;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getExpertise_level() {
@@ -80,42 +88,26 @@ public class Questionnaire implements Serializable {
 		this.sex = sex;
 	}
 
-	public List<Answer> getAnswers() {
-		return this.answers;
+	public List<Contain> getContains() {
+		return this.contains;
 	}
 
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
+	public void setContains(List<Contain> contains) {
+		this.contains = contains;
 	}
 
-	public Answer addAnswer(Answer answer) {
-		getAnswers().add(answer);
-		answer.setQuestionnaire(this);
+	public Contain addContain(Contain contain) {
+		getContains().add(contain);
+		contain.setQuestionnaire(this);
 
-		return answer;
+		return contain;
 	}
 
-	public Answer removeAnswer(Answer answer) {
-		getAnswers().remove(answer);
-		answer.setQuestionnaire(null);
+	public Contain removeContain(Contain contain) {
+		getContains().remove(contain);
+		contain.setQuestionnaire(null);
 
-		return answer;
-	}
-
-	public List<Marketingquestion> getMarketingquestions() {
-		return this.marketingquestions;
-	}
-
-	public void setMarketingquestions(List<Marketingquestion> marketingquestions) {
-		this.marketingquestions = marketingquestions;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+		return contain;
 	}
 
 	public Product getProduct() {
@@ -124,6 +116,14 @@ public class Questionnaire implements Serializable {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

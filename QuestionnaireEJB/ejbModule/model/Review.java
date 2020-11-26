@@ -13,32 +13,31 @@ import javax.persistence.*;
 public class Review implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="ReviewID")
-	private int reviewID;
+	@EmbeddedId
+	private ReviewPK id;
 
 	@Column(name="Review_Text")
 	private Object review_Text;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="UserID")
-	private User user;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
 	@JoinColumn(name="ProductID")
 	private Product product;
 
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="UserID")
+	private User user;
+
 	public Review() {
 	}
 
-	public int getReviewID() {
-		return this.reviewID;
+	public ReviewPK getId() {
+		return this.id;
 	}
 
-	public void setReviewID(int reviewID) {
-		this.reviewID = reviewID;
+	public void setId(ReviewPK id) {
+		this.id = id;
 	}
 
 	public Object getReview_Text() {
@@ -49,20 +48,20 @@ public class Review implements Serializable {
 		this.review_Text = review_Text;
 	}
 
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public Product getProduct() {
 		return this.product;
 	}
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

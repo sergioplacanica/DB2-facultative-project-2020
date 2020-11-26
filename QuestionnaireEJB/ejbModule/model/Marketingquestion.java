@@ -21,22 +21,9 @@ public class Marketingquestion implements Serializable {
 	@Column(name="Description")
 	private String description;
 
-	//bi-directional many-to-one association to Answer
+	//bi-directional many-to-one association to Contain
 	@OneToMany(mappedBy="marketingquestion")
-	private List<Answer> answers;
-
-	//bi-directional many-to-many association to Questionnaire
-	@ManyToMany
-	@JoinTable(
-		name="Contain"
-		, joinColumns={
-			@JoinColumn(name="QuestionID")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="QuestionnaireID")
-			}
-		)
-	private List<Questionnaire> questionnaires;
+	private List<Contain> contains;
 
 	public Marketingquestion() {
 	}
@@ -57,34 +44,26 @@ public class Marketingquestion implements Serializable {
 		this.description = description;
 	}
 
-	public List<Answer> getAnswers() {
-		return this.answers;
+	public List<Contain> getContains() {
+		return this.contains;
 	}
 
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
+	public void setContains(List<Contain> contains) {
+		this.contains = contains;
 	}
 
-	public Answer addAnswer(Answer answer) {
-		getAnswers().add(answer);
-		answer.setMarketingquestion(this);
+	public Contain addContain(Contain contain) {
+		getContains().add(contain);
+		contain.setMarketingquestion(this);
 
-		return answer;
+		return contain;
 	}
 
-	public Answer removeAnswer(Answer answer) {
-		getAnswers().remove(answer);
-		answer.setMarketingquestion(null);
+	public Contain removeContain(Contain contain) {
+		getContains().remove(contain);
+		contain.setMarketingquestion(null);
 
-		return answer;
-	}
-
-	public List<Questionnaire> getQuestionnaires() {
-		return this.questionnaires;
-	}
-
-	public void setQuestionnaires(List<Questionnaire> questionnaires) {
-		this.questionnaires = questionnaires;
+		return contain;
 	}
 
 }

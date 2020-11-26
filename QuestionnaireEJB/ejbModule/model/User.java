@@ -37,10 +37,6 @@ public class User implements Serializable {
 	@ManyToMany(mappedBy="users")
 	private List<Accesstime> accesstimes;
 
-	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="user")
-	private List<Answer> answers;
-
 	//bi-directional many-to-one association to Questionnaire
 	@OneToMany(mappedBy="user")
 	private List<Questionnaire> questionnaires;
@@ -106,28 +102,6 @@ public class User implements Serializable {
 
 	public void setAccesstimes(List<Accesstime> accesstimes) {
 		this.accesstimes = accesstimes;
-	}
-
-	public List<Answer> getAnswers() {
-		return this.answers;
-	}
-
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
-	}
-
-	public Answer addAnswer(Answer answer) {
-		getAnswers().add(answer);
-		answer.setUser(this);
-
-		return answer;
-	}
-
-	public Answer removeAnswer(Answer answer) {
-		getAnswers().remove(answer);
-		answer.setUser(null);
-
-		return answer;
 	}
 
 	public List<Questionnaire> getQuestionnaires() {
