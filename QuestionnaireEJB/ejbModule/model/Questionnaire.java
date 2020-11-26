@@ -15,7 +15,6 @@ public class Questionnaire implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="QuestionnaireID")
 	private int questionnaireID;
 
@@ -36,15 +35,15 @@ public class Questionnaire implements Serializable {
 	@ManyToMany(mappedBy="questionnaires")
 	private List<Marketingquestion> marketingquestions;
 
-	//bi-directional many-to-one association to Product
-	@ManyToOne
-	@JoinColumn(name="ProductID")
-	private Product product;
-
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="UserID")
 	private User user;
+
+	//bi-directional many-to-one association to Product
+	@ManyToOne
+	@JoinColumn(name="ProductID")
+	private Product product;
 
 	public Questionnaire() {
 	}
@@ -111,20 +110,20 @@ public class Questionnaire implements Serializable {
 		this.marketingquestions = marketingquestions;
 	}
 
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	public User getUser() {
 		return this.user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 }

@@ -14,7 +14,6 @@ public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="Answer_ID")
 	private int answer_ID;
 
@@ -24,20 +23,20 @@ public class Answer implements Serializable {
 	@Column(name="Offensive")
 	private Object offensive;
 
-	//bi-directional many-to-one association to Marketingquestion
+	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="QuestionID")
-	private Marketingquestion marketingquestion;
+	@JoinColumn(name="UserID")
+	private User user;
 
 	//bi-directional many-to-one association to Questionnaire
 	@ManyToOne
 	@JoinColumn(name="QuestionnaireID")
 	private Questionnaire questionnaire;
 
-	//bi-directional many-to-one association to User
+	//bi-directional many-to-one association to Marketingquestion
 	@ManyToOne
-	@JoinColumn(name="UserID")
-	private User user;
+	@JoinColumn(name="QuestionID")
+	private Marketingquestion marketingquestion;
 
 	public Answer() {
 	}
@@ -66,12 +65,12 @@ public class Answer implements Serializable {
 		this.offensive = offensive;
 	}
 
-	public Marketingquestion getMarketingquestion() {
-		return this.marketingquestion;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setMarketingquestion(Marketingquestion marketingquestion) {
-		this.marketingquestion = marketingquestion;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Questionnaire getQuestionnaire() {
@@ -82,12 +81,12 @@ public class Answer implements Serializable {
 		this.questionnaire = questionnaire;
 	}
 
-	public User getUser() {
-		return this.user;
+	public Marketingquestion getMarketingquestion() {
+		return this.marketingquestion;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMarketingquestion(Marketingquestion marketingquestion) {
+		this.marketingquestion = marketingquestion;
 	}
 
 }

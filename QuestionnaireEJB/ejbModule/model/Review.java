@@ -14,22 +14,21 @@ public class Review implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ReviewID")
 	private int reviewID;
 
 	@Column(name="Review_Text")
 	private Object review_Text;
 
-	//bi-directional many-to-one association to Product
-	@ManyToOne
-	@JoinColumn(name="ProductID")
-	private Product product;
-
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="UserID")
 	private User user;
+
+	//bi-directional many-to-one association to Product
+	@ManyToOne
+	@JoinColumn(name="ProductID")
+	private Product product;
 
 	public Review() {
 	}
@@ -50,20 +49,20 @@ public class Review implements Serializable {
 		this.review_Text = review_Text;
 	}
 
-	public Product getProduct() {
-		return this.product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	public User getUser() {
 		return this.user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Product getProduct() {
+		return this.product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 }

@@ -16,7 +16,6 @@ public class Accesstime implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="Access_time")
 	private Date access_time;
