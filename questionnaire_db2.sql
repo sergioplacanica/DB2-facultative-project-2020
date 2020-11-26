@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Nov 26, 2020 alle 12:25
+-- Creato il: Nov 26, 2020 alle 15:55
 -- Versione del server: 10.4.14-MariaDB
 -- Versione PHP: 7.2.34
 
@@ -20,9 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `questionnaire_db2`
 --
-DROP DATABASE IF EXISTS 'questionnaire_db2';
-CREATE DATABASE IF NOT EXISTS 'questionnaire_db2';
-USE 'questionnaire_db2';
+DROP DATABASE IF EXISTS questionnaire_db2;
+CREATE DATABASE questionnaire_db2;
+USE questionnaire_db2;
 -- --------------------------------------------------------
 
 --
@@ -47,28 +47,25 @@ CREATE TABLE `Accesstime` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Answer`
---
-
-CREATE TABLE `Answer` (
-  `Answer_ID` int(11) NOT NULL,
-  `UserID` int(11) NOT NULL,
-  `QuestionnaireID` int(11) NOT NULL,
-  `QuestionID` int(11) NOT NULL,
-  `Answer_text` text NOT NULL,
-  `Offensive` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Struttura della tabella `Contain`
 --
 
 CREATE TABLE `Contain` (
-  `QuestionnaireID` int(11) NOT NULL,
-  `QuestionID` int(11) NOT NULL
+  `UserID` int(11) NOT NULL,
+  `ProductID` int(11) NOT NULL,
+  `QuestionID` int(11) NOT NULL,
+  `Answer_text` text NOT NULL,
+  `Offensive` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `Contain`
+--
+
+INSERT INTO `Contain` (`UserID`, `ProductID`, `QuestionID`, `Answer_text`, `Offensive`) VALUES
+(1, 2, 2, 'si', 0),
+(2, 1, 3, '12', 0),
+(2, 2, 1, 'si', 0);
 
 -- --------------------------------------------------------
 
@@ -80,6 +77,15 @@ CREATE TABLE `Marketingquestion` (
   `QuestionID` int(11) NOT NULL,
   `Description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `Marketingquestion`
+--
+
+INSERT INTO `Marketingquestion` (`QuestionID`, `Description`) VALUES
+(1, 'Ti è piaciuto il prodotto?'),
+(2, 'Lo consiglieresti ad un amico?'),
+(3, 'Quanto ore lo usi al giorno?');
 
 -- --------------------------------------------------------
 
@@ -103,6 +109,14 @@ CREATE TABLE `Product` (
   `Image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dump dei dati per la tabella `Product`
+--
+
+INSERT INTO `Product` (`ProductID`, `Name`, `Image`) VALUES
+(1, 'Playstation 5', '/serverurl/Ps5.jpeg'),
+(2, 'GoPro Hero 9', '/serverurl/GoPRO9.jpeg');
+
 -- --------------------------------------------------------
 
 --
@@ -110,13 +124,22 @@ CREATE TABLE `Product` (
 --
 
 CREATE TABLE `Questionnaire` (
-  `QuestionnaireID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
-  `Age` tinyint(4) NOT NULL,
-  `Sex` set('male','female') NOT NULL,
-  `Expertise_level` set('low','medium','high') NOT NULL
+  `Date` date DEFAULT current_timestamp(),
+  `Age` tinyint(4) DEFAULT NULL,
+  `Sex` set('male','female') DEFAULT NULL,
+  `Expertise_level` set('low','medium','high') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `Questionnaire`
+--
+
+INSERT INTO `Questionnaire` (`UserID`, `ProductID`, `Date`, `Age`, `Sex`, `Expertise_level`) VALUES
+(1, 2, '2020-11-03', NULL, 'male', 'low'),
+(2, 1, '2020-11-02', NULL, NULL, NULL),
+(2, 2, '2020-11-18', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -125,11 +148,18 @@ CREATE TABLE `Questionnaire` (
 --
 
 CREATE TABLE `Review` (
-  `ReviewID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
   `Review_Text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dump dei dati per la tabella `Review`
+--
+
+INSERT INTO `Review` (`UserID`, `ProductID`, `Review_Text`) VALUES
+(1, 1, 'Meglio la xbox'),
+(1, 2, 'bella,la consiglio');
 
 -- --------------------------------------------------------
 
@@ -164,6 +194,7 @@ INSERT INTO `User` (`UserID`, `Username`, `Password`, `Email`, `Admin`, `Blocked
 -- Indici per le tabelle `Accesslog`
 --
 ALTER TABLE `Accesslog`
+  ADD PRIMARY KEY (`UserID`,`Access_time`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `Access_time` (`Access_time`);
 
@@ -174,19 +205,10 @@ ALTER TABLE `Accesstime`
   ADD PRIMARY KEY (`Access_time`);
 
 --
--- Indici per le tabelle `Answer`
---
-ALTER TABLE `Answer`
-  ADD PRIMARY KEY (`Answer_ID`),
-  ADD KEY `UserID` (`UserID`),
-  ADD KEY `QuestionnaireID` (`QuestionnaireID`),
-  ADD KEY `QuestionID` (`QuestionID`);
-
---
 -- Indici per le tabelle `Contain`
 --
 ALTER TABLE `Contain`
-  ADD KEY `QuestionnaireID` (`QuestionnaireID`),
+  ADD PRIMARY KEY (`UserID`,`ProductID`,`QuestionID`),
   ADD KEY `QuestionID` (`QuestionID`);
 
 --
@@ -211,15 +233,14 @@ ALTER TABLE `Product`
 -- Indici per le tabelle `Questionnaire`
 --
 ALTER TABLE `Questionnaire`
-  ADD PRIMARY KEY (`QuestionnaireID`),
-  ADD KEY `UserID` (`UserID`),
+  ADD PRIMARY KEY (`UserID`,`ProductID`),
   ADD KEY `ProductID` (`ProductID`);
 
 --
 -- Indici per le tabelle `Review`
 --
 ALTER TABLE `Review`
-  ADD PRIMARY KEY (`ReviewID`),
+  ADD PRIMARY KEY (`UserID`,`ProductID`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `ProductID` (`ProductID`);
 
@@ -234,34 +255,16 @@ ALTER TABLE `User`
 --
 
 --
--- AUTO_INCREMENT per la tabella `Answer`
---
-ALTER TABLE `Answer`
-  MODIFY `Answer_ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT per la tabella `Marketingquestion`
 --
 ALTER TABLE `Marketingquestion`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `Product`
 --
 ALTER TABLE `Product`
-  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `Questionnaire`
---
-ALTER TABLE `Questionnaire`
-  MODIFY `QuestionnaireID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `Review`
---
-ALTER TABLE `Review`
-  MODIFY `ReviewID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `User`
@@ -281,18 +284,10 @@ ALTER TABLE `Accesslog`
   ADD CONSTRAINT `Accesslog_ibfk_2` FOREIGN KEY (`Access_time`) REFERENCES `Accesstime` (`Access_time`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `Answer`
---
-ALTER TABLE `Answer`
-  ADD CONSTRAINT `Answer_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `User` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Answer_ibfk_2` FOREIGN KEY (`QuestionnaireID`) REFERENCES `Questionnaire` (`QuestionnaireID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Answer_ibfk_3` FOREIGN KEY (`QuestionID`) REFERENCES `Marketingquestion` (`QuestionID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Limiti per la tabella `Contain`
 --
 ALTER TABLE `Contain`
-  ADD CONSTRAINT `Contain_ibfk_1` FOREIGN KEY (`QuestionnaireID`) REFERENCES `Questionnaire` (`QuestionnaireID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Contain_ibfk_1` FOREIGN KEY (`UserID`,`ProductID`) REFERENCES `Questionnaire` (`UserID`, `ProductID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Contain_ibfk_2` FOREIGN KEY (`QuestionID`) REFERENCES `Marketingquestion` (`QuestionID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
