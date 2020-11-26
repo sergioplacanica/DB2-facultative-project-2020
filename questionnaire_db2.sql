@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Nov 25, 2020 alle 12:40
+-- Creato il: Nov 26, 2020 alle 12:25
 -- Versione del server: 10.4.14-MariaDB
 -- Versione PHP: 7.2.34
 
@@ -20,7 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `questionnaire_db2`
 --
-
+DROP DATABASE IF EXISTS 'questionnaire_db2';
+CREATE DATABASE IF NOT EXISTS 'questionnaire_db2';
+USE 'questionnaire_db2';
 -- --------------------------------------------------------
 
 --
@@ -49,6 +51,7 @@ CREATE TABLE `Accesstime` (
 --
 
 CREATE TABLE `Answer` (
+  `Answer_ID` int(11) NOT NULL,
   `UserID` int(11) NOT NULL,
   `QuestionnaireID` int(11) NOT NULL,
   `QuestionID` int(11) NOT NULL,
@@ -174,6 +177,7 @@ ALTER TABLE `Accesstime`
 -- Indici per le tabelle `Answer`
 --
 ALTER TABLE `Answer`
+  ADD PRIMARY KEY (`Answer_ID`),
   ADD KEY `UserID` (`UserID`),
   ADD KEY `QuestionnaireID` (`QuestionnaireID`),
   ADD KEY `QuestionID` (`QuestionID`);
@@ -190,6 +194,12 @@ ALTER TABLE `Contain`
 --
 ALTER TABLE `Marketingquestion`
   ADD PRIMARY KEY (`QuestionID`);
+
+--
+-- Indici per le tabelle `Offensiveword`
+--
+ALTER TABLE `Offensiveword`
+  ADD PRIMARY KEY (`Word`);
 
 --
 -- Indici per le tabelle `Product`
@@ -222,6 +232,12 @@ ALTER TABLE `User`
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
+
+--
+-- AUTO_INCREMENT per la tabella `Answer`
+--
+ALTER TABLE `Answer`
+  MODIFY `Answer_ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT per la tabella `Marketingquestion`
