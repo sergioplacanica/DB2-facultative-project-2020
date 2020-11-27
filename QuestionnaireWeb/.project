@@ -3,6 +3,7 @@
 	<name>QuestionnaireWeb</name>
 	<comment></comment>
 	<projects>
+		<project>QuestionnaireEJB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
