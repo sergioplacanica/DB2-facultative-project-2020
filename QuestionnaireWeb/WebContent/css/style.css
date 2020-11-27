@@ -1,0 +1,97 @@
+*{
+    padding:  0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background: rgb(99, 99, 99);
+}
+.row{
+    background-color:white;
+    border-radius: 30px;
+    box-shadow: 12px 12px 22px rgb(99, 99, 99);
+}
+img{
+    border-radius: 30px;
+}
+
+#login{
+    margin-bottom: 0.2cm;
+}
+
+.btn1{
+    border:none;
+    outline:none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+
+}
+
+.btn1:hover{
+    background: white;
+    border: 1px solid;
+    color: black;
+}
+
+#register{
+    background-color: rgb(34, 175, 34);
+    margin-bottom: 1.4cm;
+}
+
+#register:hover{
+    background:rgb(22, 159, 22);
+    color: white;
+}
+
+#modalRegister{
+    background-color: rgb(34, 175, 34);
+}
+
+#modalRegister:hover{
+    background:rgb(22, 159, 22);
+    color: white;
+}
+
+.navbar-custom{
+    background-color: green;
+}
+
+h2{
+    margin-top: 0.6cm;
+    color: rgb(206, 0, 0);
+    text-align: center;
+}
+
+h1{
+    margin-top: 0.6cm;
+    margin-bottom: 1cm;
+    text-align: center;
+}
+
+ul{
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left:0 ;
+    margin-bottom: 0;
+}
+
+li{
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+
+    margin-bottom: 10px;
+    background-color: #fff;
+    border:1px solid;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+
+
+}
