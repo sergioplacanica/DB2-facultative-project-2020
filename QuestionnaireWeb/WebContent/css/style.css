@@ -12,7 +12,8 @@ body{
     box-shadow: 12px 12px 22px rgb(99, 99, 99);
 }
 img{
-    border-radius: 30px;
+    border-top-left-radius: 30px ;
+    border-bottom-left-radius: 30px ;
 }
 
 #login{
@@ -37,9 +38,26 @@ img{
     color: black;
 }
 
+.deleteBtn{
+    border:none;
+    outline:none;
+    height: 50px;
+    width: 100%;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+
+}
+
+.deleteBtn:hover{
+    background: rgb(219, 0, 0);
+    border: 1px solid;
+    color: white;
+}
+
 #register{
     background-color: rgb(34, 175, 34);
-    margin-bottom: 1.4cm;
 }
 
 #register:hover{
@@ -67,9 +85,20 @@ h2{
 }
 
 h1{
-    margin-top: 0.6cm;
+    color: black;
+    margin-top: 1cm;
     margin-bottom: 1cm;
     text-align: center;
+}
+
+#greetings{  
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    color: black;
+    transform: translateX(-50%) translateY(-50%);
+
+
 }
 
 ul{
