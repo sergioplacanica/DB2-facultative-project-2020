@@ -13,5 +13,12 @@
 		<class>model.Review</class>
 		<class>model.ReviewPK</class>
 		<class>model.User</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/questionnaire_db2" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="catania46!" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINE" />
+		</properties>
 	</persistence-unit>
 </persistence>

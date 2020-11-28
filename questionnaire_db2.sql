@@ -126,7 +126,7 @@ INSERT INTO `Product` (`ProductID`, `Name`, `Image`) VALUES
 CREATE TABLE `Questionnaire` (
   `UserID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
-  `Date` date NOT NULL,
+  `Date` date DEFAULT current_timestamp(),
   `Age` tinyint(4) DEFAULT NULL,
   `Sex` set('male','female') DEFAULT NULL,
   `Expertise_level` set('low','medium','high') DEFAULT NULL
