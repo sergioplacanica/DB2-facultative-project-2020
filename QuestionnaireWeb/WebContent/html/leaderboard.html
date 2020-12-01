@@ -15,7 +15,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="homepage.html">
       <img src="../images/icon.svg" height="30" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -24,11 +24,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="homepage.html">Home <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link active" href="leaderboard.html">Leaderboard</a>
         <a class="nav-item nav-link" href="createQuestionnaire.html">Product of the day</a>
       </div>
     </div>
+    <form class="form-inline my-2 my-lg-0">
+      <a class="nav-item nav-link" href="../index.html">Login</a>
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
+        data-target="#staticBackdrop">
+        Register
+      </button>
+    </form>
   </nav>
   <table class="table table-hover table-dark">
     <thead>
@@ -57,6 +64,50 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="staticBackdropLabel">Sign up</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container">
+            <form>
+              <div class="form-row">
+                <div class="col">
+                  <input type="text" class="form-control my-3 p-4" placeholder="First name">
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control my-3 p-4" placeholder="Last name">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-lg-12">
+                  <input type="email" placeholder="Email Address" class="form-control my-3 p-4">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-lg-12">
+                  <input type="password" placeholder="Password" class="form-control my-3 p-4">
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="modalRegister">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

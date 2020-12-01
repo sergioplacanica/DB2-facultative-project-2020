@@ -15,7 +15,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:black;">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="html/homepage.html">
       <img src="images/icon.svg" id="lambo" height="30" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -24,11 +24,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="index.html">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" href="html/homepage.html">Home <span class="sr-only">(current)</span></a>
         <a class="nav-item nav-link" href="html/leaderboard.html">Leaderboard</a>
         <a class="nav-item nav-link" href="html/createQuestionnaire.html">Product of the day</a>
       </div>
     </div>
+    <form class="form-inline my-2 my-lg-0">
+      <a class="nav-item nav-link" href="../index.html">Login</a>
+      
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
+        Register
+      </button>
+    </form>
   </nav>
 
   <section class="form my-4 mx-5">
@@ -117,18 +124,6 @@
       </div>
     </div>
   </section>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

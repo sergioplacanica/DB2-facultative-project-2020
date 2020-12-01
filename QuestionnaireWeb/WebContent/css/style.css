@@ -4,13 +4,16 @@
     box-sizing: border-box;
 }
 body{
-    background: rgb(99, 99, 99);
+    width:100%;
+    height: 100vh;
+    background-image: linear-gradient(rgb(255, 255, 255),rgb(153, 153, 153));
 }
 .row{
     background-color:white;
     border-radius: 30px;
-    box-shadow: 12px 12px 22px rgb(99, 99, 99);
+    box-shadow: 12px 12px 22px black;
 }
+
 img{
     border-top-left-radius: 30px ;
     border-bottom-left-radius: 30px ;
@@ -121,6 +124,4 @@ li{
     border-top-right-radius: .25rem;
     border-bottom-left-radius: .25rem;
     border-bottom-right-radius: .25rem;
-
-
 }
