@@ -7,6 +7,7 @@ body{
     width:100%;
     height: 100vh;
     background-image: linear-gradient(rgb(255, 255, 255),rgb(153, 153, 153));
+    min-height: 100%;
 }
 .row{
     background-color:white;
@@ -124,4 +125,23 @@ li{
     border-top-right-radius: .25rem;
     border-bottom-left-radius: .25rem;
     border-bottom-right-radius: .25rem;
+}
+
+/* Footer */
+
+footer{
+    position:absolute;
+   bottom:0;
+   width:100%;
+   height:55px; 
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background: black;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.footer-p{
+    color: white;
+    padding-top: 10px;
 }
