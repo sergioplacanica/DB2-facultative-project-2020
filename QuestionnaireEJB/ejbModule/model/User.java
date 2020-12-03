@@ -19,10 +19,10 @@ public class User implements Serializable {
 	private int userID;
 
 	@Column(name="Admin")
-	private Object admin;
+	private Boolean admin;
 
 	@Column(name="Blocked")
-	private Object blocked;
+	private Boolean blocked;
 
 	@Column(name="Email")
 	private String email;
@@ -56,19 +56,19 @@ public class User implements Serializable {
 		this.userID = userID;
 	}
 
-	public Object getAdmin() {
+	public Boolean getAdmin() {
 		return this.admin;
 	}
 
-	public void setAdmin(Object admin) {
+	public void setAdmin(Boolean admin) {
 		this.admin = admin;
 	}
 
-	public Object getBlocked() {
+	public Boolean getBlocked() {
 		return this.blocked;
 	}
 
-	public void setBlocked(Object blocked) {
+	public void setBlocked(Boolean blocked) {
 		this.blocked = blocked;
 	}
 

@@ -17,7 +17,7 @@ public class Review implements Serializable {
 	private ReviewPK id;
 
 	@Column(name="Review_Text")
-	private Object review_Text;
+	private String review_Text;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
@@ -40,11 +40,11 @@ public class Review implements Serializable {
 		this.id = id;
 	}
 
-	public Object getReview_Text() {
+	public String getReview_Text() {
 		return this.review_Text;
 	}
 
-	public void setReview_Text(Object review_Text) {
+	public void setReview_Text(String review_Text) {
 		this.review_Text = review_Text;
 	}
 

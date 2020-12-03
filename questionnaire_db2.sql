@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Nov 26, 2020 alle 15:55
+-- Creato il: Dic 03, 2020 alle 19:44
 -- Versione del server: 10.4.14-MariaDB
 -- Versione PHP: 7.2.34
 
@@ -55,7 +55,7 @@ CREATE TABLE `Contain` (
   `ProductID` int(11) NOT NULL,
   `QuestionID` int(11) NOT NULL,
   `Answer_text` text NOT NULL,
-  `Offensive` tinyint(1) NOT NULL DEFAULT 0
+  `Offensive` boolean NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `Questionnaire` (
   `UserID` int(11) NOT NULL,
   `ProductID` int(11) NOT NULL,
   `Date` date NOT NULL,
-  `Age` tinyint(4) DEFAULT NULL,
+  `Age` int(4) DEFAULT NULL,
   `Sex` set('male','female') DEFAULT NULL,
   `Expertise_level` set('low','medium','high') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -172,8 +172,8 @@ CREATE TABLE `User` (
   `Username` varchar(40) NOT NULL,
   `Password` varchar(42) NOT NULL,
   `Email` varchar(40) NOT NULL,
-  `Admin` tinyint(1) NOT NULL,
-  `Blocked` tinyint(1) NOT NULL
+  `Admin` boolean NOT NULL,
+  `Blocked` boolean NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

@@ -17,10 +17,10 @@ public class Contain implements Serializable {
 	private ContainPK id;
 
 	@Column(name="Answer_text")
-	private Object answer_text;
+	private String answer_text;
 
 	@Column(name="Offensive")
-	private Object offensive;
+	private Boolean offensive;
 
 	//bi-directional many-to-one association to Marketingquestion
 	@ManyToOne
@@ -50,7 +50,7 @@ public class Contain implements Serializable {
 		return this.answer_text;
 	}
 
-	public void setAnswer_text(Object answer_text) {
+	public void setAnswer_text(String answer_text) {
 		this.answer_text = answer_text;
 	}
 
@@ -58,7 +58,7 @@ public class Contain implements Serializable {
 		return this.offensive;
 	}
 
-	public void setOffensive(Object offensive) {
+	public void setOffensive(Boolean offensive) {
 		this.offensive = offensive;
 	}
 
