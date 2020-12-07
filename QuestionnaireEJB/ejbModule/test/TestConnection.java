@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import model.User;
 
 public class TestConnection {
-	@PersistenceContext(unitName = "QuestionnaireEJB")
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuestionnaireEJB");
 		EntityManager em = emf.createEntityManager();

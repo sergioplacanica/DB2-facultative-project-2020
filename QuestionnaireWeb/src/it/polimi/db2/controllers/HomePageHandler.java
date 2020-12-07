@@ -10,6 +10,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 @WebServlet("/Home")
+
 public class HomePageHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
@@ -28,7 +29,7 @@ public class HomePageHandler extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String resourcePath = getServletContext().getContextPath() + "/index.html";
+		String resourcePath = getServletContext().getContextPath() + "WebContent/index.html";
 		System.err.println(resourcePath);
 		HttpSession session = req.getSession();
 		if (session.isNew() || session.getAttribute("user") == null) {
