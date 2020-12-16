@@ -10,6 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name = "user", schema = "db_questionnaire")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -19,10 +20,10 @@ public class User implements Serializable {
 	private int userID;
 
 	@Column(name="Admin")
-	private Boolean admin;
+	private Boolean admin=false;
 
 	@Column(name="Blocked")
-	private Boolean blocked;
+	private Boolean blocked=false;
 
 	@Column(name="Email")
 	private String email;
@@ -48,6 +49,12 @@ public class User implements Serializable {
 	public User() {
 	}
 
+	public User(String username, String password, String email) {
+		this.username=username;
+		this.password=password;
+		this.email=email;
+		
+	}
 	public int getUserID() {
 		return this.userID;
 	}

@@ -30,7 +30,7 @@
       </div>
     </div>
     <form class="form-inline my-2 my-lg-0">
-      <a class="nav-item nav-link" href="../index.html">Login</a>
+      <a class="nav-item nav-link" href="#">Login</a>
       
       <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
         Register
@@ -48,10 +48,10 @@
 
         <div class="col-lg-7 px-5 pt-5">
           <h4>Sign into your account</h4>
-          <form>
+          <form id="loginForm" action="Login"method="post" >
             <div class="form-row">
               <div class="col-lg-8">
-                <input type="email" placeholder="Email Address" class="form-control mt-3 mb-1 p-4" required>
+                <input type="email" placeholder="Username" class="form-control mt-3 mb-1 p-4" required>
               </div>
             </div>
             <div class="form-row">
@@ -61,11 +61,12 @@
             </div>
             <div class="form-row">
               <div class="col-lg-8">
-                <button type="button" id="login" class="btn1">Login</button>
+                <button form="loginForm" type="submit" id="login" class="btn1">Login</button>
               </div>
             </div>
             <p>Have you forgot the password? <a href='#'>Click here</a></p>
             <hr>
+          </form>
 
             <div class="form-row">
               <div class="col-lg-8">
@@ -88,23 +89,20 @@
                   <div class="modal-body">
 
                     <div class="container">
-                      <form>
+                      <form id="registrationForm" action="Registration" method="post">
                         <div class="form-row">
                           <div class="col">
-                            <input type="text" class="form-control my-3 p-4" placeholder="First name">
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control my-3 p-4" placeholder="Last name">
+                            <input type="text" name="username" class="form-control my-3 p-4" placeholder="Username"required >
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="col-lg-12">
-                            <input type="email" placeholder="Email Address" class="form-control my-3 p-4">
+                            <input type="email" name="email" placeholder="Email Address" class="form-control my-3 p-4" required>
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="col-lg-12">
-                            <input type="password" placeholder="Password" class="form-control my-3 p-4">
+                            <input type="password" name="password" placeholder="Password" class="form-control my-3 p-4"required >
                           </div>
                         </div>
                       </form>
@@ -113,13 +111,11 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="modalRegister">Register</button>
+                    <button type="submit" form="registrationForm" class="btn btn-primary" id="modalRegister">Register</button>
                   </div>
                 </div>
               </div>
             </div>
-          </form>
-
         </div>
       </div>
     </div>

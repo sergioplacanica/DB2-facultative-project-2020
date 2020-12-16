@@ -4,8 +4,4 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
 		<servlet-name>HomePageHandler</servlet-name>
 		<servlet-class>it.polimi.db2.controllers.HomePageHandler</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>HomePageHandler</servlet-name>
-		<url-pattern>/Home</url-pattern>
-	</servlet-mapping>
 </web-app>
