@@ -14,9 +14,13 @@ itemsList.addEventListener('click', removeItem);
 
 function addItem(e) {
     e.preventDefault();
-    console.log(1);
-    var newItem = document.getElementById("question").value;
 
+    var inp = document.createElement("input");
+    inp.setAttribute("type","hidden");
+    inp.setAttribute("name","question");
+    inp.setAttribute("value",document.getElementById("question").value);
+
+    var newItem = document.getElementById("question");
     var div = document.createElement('div');
     div.className = "form-row";
 
@@ -28,11 +32,13 @@ function addItem(e) {
 
     var li = document.createElement('li');
     li.className = "list-group-item";
+    li.setAttribute("name","li")
 
     div.appendChild(col);
     div.appendChild(col1);
     col.appendChild(li);
-    li.appendChild(document.createTextNode(newItem));
+    col.appendChild(inp);
+    li.appendChild(document.createTextNode(newItem.value));
     console.log(div);
 
 
@@ -43,6 +49,10 @@ function addItem(e) {
 
     itemsList.appendChild(div);
     document.getElementById("question").value='';
+
+    
+
+
 }
 
 function removeItem(e) {
@@ -50,6 +60,7 @@ function removeItem(e) {
         if (confirm('Are you sure?')) {
             var row = e.target.parentElement.parentElement;
             itemsList.removeChild(row);
+
         }
     }
 

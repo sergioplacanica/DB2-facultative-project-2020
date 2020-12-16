@@ -52,9 +52,11 @@
 
       <div class="custom-file">
         <input type="file" class="custom-file-input" id="customFile">
-        <label class="custom-file-label" id="label" for="customFile">Select the image for the product</label>
+        <label class="custom-file-label " id="label" for="customFile">Select the image for the product</label>
         <input type="hidden" value="/" name="imagePath" id="imagePath">
       </div>
+      <ul id="items" class="list-group my-3" form="productForm">
+      </ul>
     </form>
 
     <hr>
@@ -68,10 +70,9 @@
           <button type="submit" id="addQuestion" class="btn1 my-3">Add</button>
         </div>
       </div>
-
-      <ul id="items" class="list-group">
-      </ul>
     </form>
+    
+
 
     <button type="submit" form="productForm" class="btn1" id="register">
       Submit

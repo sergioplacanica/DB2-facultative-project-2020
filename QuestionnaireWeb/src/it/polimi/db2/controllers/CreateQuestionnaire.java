@@ -30,7 +30,11 @@ public class CreateQuestionnaire extends HttpServlet {
 		System.out.println(productName);
 		String imagePath=request.getParameter("imagePath");
 		System.out.println(imagePath);
-		productService.createProduct(productName, imagePath);
+		String[] liValues = request.getParameterValues("question");
+		for(String listElement : liValues) {
+			System.out.println(listElement);
+		}
+		//productService.createProduct(productName, imagePath);
 		String ctxpath = getServletContext().getContextPath();
 		String path = ctxpath + "/html/createQuestionnaire.html";
 		System.out.println(path);
