@@ -1,5 +1,11 @@
 const form = document.getElementById('addForm');
 var itemsList = document.getElementById('items');
+document.getElementById('customFile').onchange = function () {
+    var fullPath = $("#customFile").val();    
+    var filename = fullPath.replace(/^.*[\\\/]/, '');  
+    document.getElementById("label").innerHTML=filename;
+    document.getElementById("imagePath").value=filename;
+  };
 
 form.addEventListener("submit", addItem);
 itemsList.addEventListener('click', removeItem);
@@ -36,7 +42,7 @@ function addItem(e) {
     col1.appendChild(deleteBtn);
 
     itemsList.appendChild(div);
-
+    document.getElementById("question").value='';
 }
 
 function removeItem(e) {
