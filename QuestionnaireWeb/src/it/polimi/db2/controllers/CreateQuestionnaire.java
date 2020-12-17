@@ -1,6 +1,9 @@
 package it.polimi.db2.controllers;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -34,7 +37,15 @@ public class CreateQuestionnaire extends HttpServlet {
 		for(String listElement : liValues) {
 			System.out.println(listElement);
 		}
-		//productService.createProduct(productName, imagePath);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date startDate = (Date) sdf.parse(request.getParameter("date"));
+			System.out.println(startDate);
+			productService.createProduct(productName, imagePath,startDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		String ctxpath = getServletContext().getContextPath();
 		String path = ctxpath + "/html/createQuestionnaire.html";
 		System.out.println(path);

@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -10,6 +12,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name = "product", schema = "db_questionnaire")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +26,9 @@ public class Product implements Serializable {
 
 	@Column(name="Name")
 	private String name;
+	
+	@Column(name="Date")
+	private Date date;
 
 	//bi-directional many-to-one association to Questionnaire
 	@OneToMany(mappedBy="product")
@@ -50,6 +56,15 @@ public class Product implements Serializable {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 
 	public String getName() {
 		return this.name;

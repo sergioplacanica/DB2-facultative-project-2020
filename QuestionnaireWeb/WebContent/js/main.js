@@ -1,24 +1,37 @@
 const form = document.getElementById('addForm');
 var itemsList = document.getElementById('items');
 document.getElementById('customFile').onchange = function () {
-    var fullPath = $("#customFile").val();    
-    var filename = fullPath.replace(/^.*[\\\/]/, '');  
-    document.getElementById("label").innerHTML=filename;
-    document.getElementById("imagePath").value=filename;
-  };
+    var fullPath = $("#customFile").val();
+    var filename = fullPath.replace(/^.*[\\\/]/, '');
+    document.getElementById("label").innerHTML = filename;
+    document.getElementById("imagePath").value = filename;
+};
 
 form.addEventListener("submit", addItem);
 itemsList.addEventListener('click', removeItem);
 
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+if (dd < 10) {
+    dd = '0' + dd
+}
+if (mm < 10) {
+    mm = '0' + mm
+}
 
+today = yyyy + '-' + mm + '-' + dd;
+document.getElementById("dateform").setAttribute("min", today);
 
 function addItem(e) {
     e.preventDefault();
 
     var inp = document.createElement("input");
-    inp.setAttribute("type","hidden");
-    inp.setAttribute("name","question");
-    inp.setAttribute("value",document.getElementById("question").value);
+    inp.setAttribute("type", "hidden");
+    inp.setAttribute("name", "question");
+    inp.setAttribute("value", document.getElementById("question").value);
+    inp.focus
 
     var newItem = document.getElementById("question");
     var div = document.createElement('div');
@@ -32,7 +45,7 @@ function addItem(e) {
 
     var li = document.createElement('li');
     li.className = "list-group-item";
-    li.setAttribute("name","li")
+    li.setAttribute("name", "li")
 
     div.appendChild(col);
     div.appendChild(col1);
@@ -48,9 +61,9 @@ function addItem(e) {
     col1.appendChild(deleteBtn);
 
     itemsList.appendChild(div);
-    document.getElementById("question").value='';
+    document.getElementById("question").value = '';
 
-    
+
 
 
 }

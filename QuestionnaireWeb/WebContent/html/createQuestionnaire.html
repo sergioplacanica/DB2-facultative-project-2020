@@ -42,16 +42,16 @@
     <form id="productForm" action="CreateQuestionnaire" method="post">
       <div class="form-row">
         <div class="col-7">
-          <input type="text" name="productName" class="form-control my-3 p-4" placeholder="Name of the product">
+          <input type="text" name="productName" class="form-control my-3 p-4" placeholder="Name of the product" required>
         </div>
 
         <div class="col-5">
-          <input type="date" name="date" max="2021-12-31" min="2020-11-26" class="form-control my-3 p-4" id="dateform">
+          <input type="date" name="date" class="form-control my-3 p-4" id="dateform" required>
         </div>
       </div>
 
       <div class="custom-file">
-        <input type="file" class="custom-file-input" id="customFile">
+        <input type="file" class="custom-file-input" id="customFile" required>
         <label class="custom-file-label " id="label" for="customFile">Select the image for the product</label>
         <input type="hidden" value="/" name="imagePath" id="imagePath">
       </div>
