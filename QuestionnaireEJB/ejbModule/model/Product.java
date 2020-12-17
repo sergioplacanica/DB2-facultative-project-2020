@@ -11,8 +11,8 @@ import java.util.List;
  * The persistent class for the Product database table.
  * 
  */
+//@Table(name = "product", schema = "db_questionnaire")
 @Entity
-@Table(name = "product", schema = "db_questionnaire")
 @NamedQuery(name="Product.findAll", query="SELECT p FROM Product p")
 public class Product implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -27,10 +27,11 @@ public class Product implements Serializable {
 	@Column(name="Name")
 	private String name;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="Date")
 	private Date date;
 
-	//bi-directional many-to-one association to Questionnaire
+	//bi-directional many-to-one association to Questionnaire 
 	@OneToMany(mappedBy="product")
 	private List<Questionnaire> questionnaires;
 

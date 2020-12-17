@@ -9,12 +9,12 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@NamedQuery(name="Contain.findAll", query="SELECT c FROM Contain c")
-public class Contain implements Serializable {
+@NamedQuery(name="Contain.findAll", query="SELECT c FROM Answer c")
+public class Answer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private ContainPK id;
+	private AnswerPK id;
 
 	@Column(name="Answer_text")
 	private String answer_text;
@@ -35,14 +35,14 @@ public class Contain implements Serializable {
 		})
 	private Questionnaire questionnaire;
 
-	public Contain() {
+	public Answer() {
 	}
 
-	public ContainPK getId() {
+	public AnswerPK getId() {
 		return this.id;
 	}
 
-	public void setId(ContainPK id) {
+	public void setId(AnswerPK id) {
 		this.id = id;
 	}
 

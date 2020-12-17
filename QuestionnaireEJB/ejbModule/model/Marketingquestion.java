@@ -21,9 +21,9 @@ public class Marketingquestion implements Serializable {
 	@Column(name="Description")
 	private String description;
 
-	//bi-directional many-to-one association to Contain
+	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="marketingquestion")
-	private List<Contain> contains;
+	private List<Answer> answer;
 
 	public Marketingquestion() {
 	}
@@ -44,26 +44,26 @@ public class Marketingquestion implements Serializable {
 		this.description = description;
 	}
 
-	public List<Contain> getContains() {
-		return this.contains;
+	public List<Answer> getAnswer() {
+		return this.answer;
 	}
 
-	public void setContains(List<Contain> contains) {
-		this.contains = contains;
+	public void setAnswer(List<Answer> answer) {
+		this.answer = answer;
 	}
 
-	public Contain addContain(Contain contain) {
-		getContains().add(contain);
-		contain.setMarketingquestion(this);
+	public Answer addAnswer(Answer answer) {
+		getAnswer().add(answer);
+		answer.setMarketingquestion(this);
 
-		return contain;
+		return answer;
 	}
 
-	public Contain removeContain(Contain contain) {
-		getContains().remove(contain);
-		contain.setMarketingquestion(null);
+	public Answer removeAnswer(Answer answer) {
+		getAnswer().remove(answer);
+		answer.setMarketingquestion(null);
 
-		return contain;
+		return answer;
 	}
 
 }

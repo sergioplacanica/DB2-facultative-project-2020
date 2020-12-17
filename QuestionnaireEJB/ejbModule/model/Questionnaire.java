@@ -19,7 +19,7 @@ public class Questionnaire implements Serializable {
 	private QuestionnairePK id;
 
 	@Column(name="Age")
-	private byte age;
+	private int age;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="Date")
@@ -31,9 +31,9 @@ public class Questionnaire implements Serializable {
 	@Column(name="Sex")
 	private String sex;
 
-	//bi-directional many-to-one association to Contain
+	//bi-directional many-to-one association to Answer
 	@OneToMany(mappedBy="questionnaire")
-	private List<Contain> contains;
+	private List<Answer> answer;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
@@ -56,11 +56,11 @@ public class Questionnaire implements Serializable {
 		this.id = id;
 	}
 
-	public byte getAge() {
+	public int getAge() {
 		return this.age;
 	}
 
-	public void setAge(byte age) {
+	public void setAge(int age) {
 		this.age = age;
 	}
 
@@ -88,26 +88,26 @@ public class Questionnaire implements Serializable {
 		this.sex = sex;
 	}
 
-	public List<Contain> getContains() {
-		return this.contains;
+	public List<Answer> getAnswer() {
+		return this.answer;
 	}
 
-	public void setContains(List<Contain> contains) {
-		this.contains = contains;
+	public void setAnswer(List<Answer> answer) {
+		this.answer = answer;
 	}
 
-	public Contain addContain(Contain contain) {
-		getContains().add(contain);
-		contain.setQuestionnaire(this);
+	public Answer addAnswer(Answer answer) {
+		getAnswer().add(answer);
+		answer.setQuestionnaire(this);
 
-		return contain;
+		return answer;
 	}
 
-	public Contain removeContain(Contain contain) {
-		getContains().remove(contain);
-		contain.setQuestionnaire(null);
+	public Answer removeAnswer(Answer answer) {
+		getAnswer().remove(answer);
+		answer.setQuestionnaire(null);
 
-		return contain;
+		return answer;
 	}
 
 	public Product getProduct() {

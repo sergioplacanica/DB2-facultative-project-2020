@@ -8,7 +8,7 @@ import javax.persistence.*;
  * 
  */
 @Embeddable
-public class ContainPK implements Serializable {
+public class AnswerPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class ContainPK implements Serializable {
 	@Column(name="QuestionID", insertable=false, updatable=false)
 	private int questionID;
 
-	public ContainPK() {
+	public AnswerPK() {
 	}
 	public int getUserID() {
 		return this.userID;
@@ -46,10 +46,10 @@ public class ContainPK implements Serializable {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof ContainPK)) {
+		if (!(other instanceof AnswerPK)) {
 			return false;
 		}
-		ContainPK castOther = (ContainPK)other;
+		AnswerPK castOther = (AnswerPK)other;
 		return 
 			(this.userID == castOther.userID)
 			&& (this.productID == castOther.productID)
