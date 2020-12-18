@@ -38,9 +38,15 @@ public class Product implements Serializable {
 	//bi-directional many-to-one association to Review
 	@OneToMany(mappedBy="product")
 	private List<Review> reviews;
+	
+	//bi-directional many-to-one association to MarketingQuestion
+	@OneToMany(mappedBy="product")
+	private List<Marketingquestion> marketingQuestion;
+	
 
 	public Product() {
 	}
+
 
 	public int getProductID() {
 		return this.productID;
@@ -119,4 +125,26 @@ public class Product implements Serializable {
 		return review;
 	}
 
+
+	public List<Marketingquestion> getMarketingQuestions() {
+		return marketingQuestion;
+	}
+
+	public void setMarketingQuestions(List<Marketingquestion> marketingQuestion) {
+		this.marketingQuestion = marketingQuestion;
+	}
+	
+	public Marketingquestion addMarketingQuestion(Marketingquestion marketingQuestion) {
+		getMarketingQuestions().add(marketingQuestion);
+		marketingQuestion.setProduct(this);
+
+		return marketingQuestion;
+	}
+
+	public Marketingquestion removeReview(Marketingquestion marketingQuestion) {
+		getMarketingQuestions().remove(marketingQuestion);
+		marketingQuestion.setProduct(null);
+
+		return marketingQuestion;
+	}
 }

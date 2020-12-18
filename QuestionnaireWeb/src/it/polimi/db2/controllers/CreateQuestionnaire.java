@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Product;
+import services.MarketingQuestionService;
 import services.ProductService;
 
 /**
@@ -24,6 +26,9 @@ public class CreateQuestionnaire extends HttpServlet {
     @EJB(name="services/ProductService")   
     ProductService productService;
     
+    @EJB(name="services/MarketingQuestionService")   
+    MarketingQuestionService marketingQuestionService;
+    
     public CreateQuestionnaire() {
         super();
     }
@@ -33,19 +38,20 @@ public class CreateQuestionnaire extends HttpServlet {
 		System.out.println(productName);
 		String imagePath=request.getParameter("imagePath");
 		System.out.println(imagePath);
-		String[] liValues = request.getParameterValues("question");
-		for(String listElement : liValues) {
-			System.out.println(listElement);
-		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date startDate = (Date) sdf.parse(request.getParameter("date"));
 			System.out.println(startDate);
 			productService.createProduct(productName, imagePath,startDate);
+			String[] questions = request.getParameterValues("question");
+			for(String question : questions) {
+				System.out.println(question);
+				Product product=productService.findProduct(startDate).get(0);
+				marketingQuestionService.createQuestion(question, product);
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
 		String ctxpath = getServletContext().getContextPath();
 		String path = ctxpath + "/html/createQuestionnaire.html";
 		System.out.println(path);

@@ -25,6 +25,11 @@ public class Marketingquestion implements Serializable {
 	@OneToMany(mappedBy="marketingquestion")
 	private List<Answer> answer;
 
+	//bi-directional many-to-one association to Marketingquestion
+	@ManyToOne
+	@JoinColumn(name="ProductID")
+	private Product product;
+	
 	public Marketingquestion() {
 	}
 
@@ -65,5 +70,13 @@ public class Marketingquestion implements Serializable {
 
 		return answer;
 	}
+	
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Product getProductID() {
+		return this.product;
+	}	
 
 }
