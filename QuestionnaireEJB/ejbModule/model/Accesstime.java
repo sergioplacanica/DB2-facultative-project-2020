@@ -11,6 +11,7 @@ import java.util.List;
  * 
  */
 @Entity
+//@Table(name = "accesstime", schema = "database")
 @NamedQuery(name="Accesstime.findAll", query="SELECT a FROM Accesstime a")
 public class Accesstime implements Serializable {
 	private static final long serialVersionUID = 1L;
