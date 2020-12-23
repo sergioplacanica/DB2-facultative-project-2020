@@ -24,7 +24,7 @@ import model.User;
 import services.QuestionnaireService;
 import services.UserService;
 
-@WebServlet("/html/leaderboard.html")
+@WebServlet("/html/leaderboard")
 public class Leaderboard extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
@@ -43,7 +43,6 @@ public class Leaderboard extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			List<User> users=userService.findAllUsers();
 			String path = "/html/leaderboard.html";
 			ServletContext servletContext = getServletContext();

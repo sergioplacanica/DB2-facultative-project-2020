@@ -28,7 +28,6 @@ public class Marketingquestion implements Serializable {
 	//bi-directional many-to-one association to Marketingquestion
 	@ManyToOne
 	@JoinColumn(name="ProductID")
-
 	private Product product;
 	
 	public Marketingquestion() {
