@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 //@Table(name = "user", schema = "database")
-@NamedQueries({@NamedQuery(name="User.findAll", query="SELECT u FROM User u"),
+@NamedQueries({@NamedQuery(name="User.findAll", query="SELECT u FROM User u order by u.points desc"),
 @NamedQuery(name="User.checkCredentials", query="SELECT u FROM User u WHERE u.username= ?1 and u.password= ?2")}
 )
 
@@ -37,6 +37,9 @@ public class User implements Serializable {
 
 	@Column(name="Username")
 	private String username;
+	
+	@Column(name="Points")
+	private int points;
 
 	//bi-directional many-to-many association to Accesstime
 	@ManyToMany(mappedBy="users")
@@ -107,6 +110,14 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
+	public int getPoints() {
+		return points;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
 	public List<Accesstime> getAccesstimes() {
 		return this.accesstimes;
 	}

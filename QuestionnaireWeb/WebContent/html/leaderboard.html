@@ -45,21 +45,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr th:each= "u : ${users}">
         <th scope="row">1</th>
-        <td>Mark Henry</td>
-        <td>58</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob </td>
-        <td>22</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry the Bird</td>
-        <td>14</td>
-
+        <td th:text="${u.username}"></td>
+        <td th:text="${u.points}"></td>
       </tr>
     </tbody>
   </table>
