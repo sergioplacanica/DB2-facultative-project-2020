@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+
+import model.Questionnaire;
 import model.User;
 import javax.persistence.PersistenceException;
 
@@ -26,8 +28,7 @@ public class UserService {
 	
 	public User checkCredentials (String usrn, String pwd) throws CredentialsException, NonUniqueResultException {
 		List <User> uList;
-		//EntityManagerFactory emf = Persistence.createEntityManagerFactory("QuestionnaireEJB");
-        //EntityManager em = emf.createEntityManager();
+
 		try {
 	        uList =em.createQuery("SELECT u FROM User u where u.username = ?1 and u.password = ?2", User.class).setParameter(1, usrn).setParameter(2, pwd).getResultList();			
 		} catch (PersistenceException e) {
@@ -59,5 +60,12 @@ public class UserService {
 			throw new UsernameException("This username has been already used");
 		}
 	}
+	
+	public List<User> findAllUsers() {
+		 List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
+		 return users;
+	}
+	
+	
 
 }

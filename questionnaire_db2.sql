@@ -198,7 +198,7 @@ CREATE TABLE `questionnaire` (
 
 LOCK TABLES `questionnaire` WRITE;
 /*!40000 ALTER TABLE `questionnaire` DISABLE KEYS */;
-INSERT INTO `questionnaire` VALUES (1,2,'2020-11-03',NULL,'male','low'),(2,1,'2020-11-02',NULL,NULL,NULL),(2,2,'2020-11-18',NULL,NULL,NULL);
+INSERT INTO `questionnaire` VALUES (1,2,'2020-11-03',15,'','low'),(2,1,'2020-11-02',NULL,NULL,NULL),(2,2,'2020-11-18',NULL,NULL,NULL),(8,1,'2020-12-12',28,'male','low'),(9,1,'2020-12-12',15,'female','low'),(11,1,'2020-12-12',16,'male','low');
 /*!40000 ALTER TABLE `questionnaire` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,6 +245,7 @@ CREATE TABLE `user` (
   `Email` varchar(40) NOT NULL,
   `Admin` tinyint(1) NOT NULL DEFAULT '0',
   `Blocked` tinyint(1) NOT NULL DEFAULT '0',
+  `Points` int DEFAULT '0',
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `Username_UNIQUE` (`Username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -256,7 +257,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'user1','*668425423DB5193AF921380129F465A6425216D0','lorenzo1.amata@mail.polimi.it',1,0),(2,'user2','*DC52755F3C09F5923046BD42AFA76BD1D80DF2E9','lorenzo2.amata@mail.polimi.it',0,1),(3,'user3','*40C3E7D386A2FADBDF69ACEBE7AA4DC3C723D798','lorenzo3.amata@mail.polimi.it',0,0),(4,'user4','*F97AEB38B3275C06D822FC9341A2151642C81988','lorenzo4.amata@mail.polimi.it',1,1),(8,'deep','deep98','deep98@gmail.com',0,0),(9,'Antonio','deep123412','tony45@yahoo.it',0,0),(11,'ronny67','asfgas','sostancozii@mcdonald.it',0,0),(15,'deep98','km','tony45@yahoo.it',0,0),(23,'andrea123','asdfqas','andrea123@gmail.com',0,0),(31,'alessandro','ale1234','ale@yahoo.it',0,0),(32,'alex123','asd123as','alexa@gasda.it',0,0);
+INSERT INTO `user` VALUES (1,'user1','*668425423DB5193AF921380129F465A6425216D0','lorenzo1.amata@mail.polimi.it',1,0,7),(2,'user2','*DC52755F3C09F5923046BD42AFA76BD1D80DF2E9','lorenzo2.amata@mail.polimi.it',0,1,7),(3,'user3','*40C3E7D386A2FADBDF69ACEBE7AA4DC3C723D798','lorenzo3.amata@mail.polimi.it',0,0,4),(4,'user4','*F97AEB38B3275C06D822FC9341A2151642C81988','lorenzo4.amata@mail.polimi.it',1,1,3),(8,'deep','deep98','deep98@gmail.com',0,0,25),(9,'Antonio','deep123412','tony45@yahoo.it',0,0,21),(11,'ronny67','asfgas','sostancozii@mcdonald.it',0,0,45),(15,'deep98','km','tony45@yahoo.it',0,0,24),(23,'andrea123','asdfqas','andrea123@gmail.com',0,0,3),(31,'alessandro','ale1234','ale@yahoo.it',0,0,4),(32,'alex123','asd123as','alexa@gasda.it',0,0,78);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -269,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-18 23:56:49
+-- Dump completed on 2020-12-23 19:15:34

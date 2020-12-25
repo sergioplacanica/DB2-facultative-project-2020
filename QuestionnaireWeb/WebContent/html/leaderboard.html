@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta charset="ISO-8859-1">
   <title>Leaderboard</title>
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <title>Hello, world!</title>
 </head>
 
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
-    <a class="navbar-brand" href="homepage.html">
+    <a class="navbar-brand" href="Home">
       <img src="../images/icon.svg" height="30" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -23,19 +23,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="homepage.html">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link active" href="leaderboard.html">Leaderboard</a>
-        <a class="nav-item nav-link" href="createQuestionnaire.html">Product of the day</a>
+        <a class="nav-item nav-link" href="Home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" href="Leaderboard">Leaderboard</a>
+        <a class="nav-item nav-link" href="RetrieveVariableQuestions">Questionnaire of the Day</a>
       </div>
     </div>
-    <form class="form-inline my-2 my-lg-0">
-      <a class="nav-item nav-link" href="../index.html">Login</a>
-      <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
-        data-target="#staticBackdrop">
-        Register
-      </button>
-    </form>
+    <div class="form-inline my-2 my-lg-0">
+     <p class="footer-p" th:text="${session.username}"></p>
+    </div>
   </nav>
+  
+  
   <table class="table table-hover table-dark">
     <thead>
       <tr>
@@ -45,21 +43,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark Henry</td>
-        <td>58</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob </td>
-        <td>22</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry the Bird</td>
-        <td>14</td>
-
+      <tr th:each= "u,iter : ${users}">
+      	<td th:text="${iter.count}"></td>
+        <td th:text="${u.username}"></td>
+        <td th:text="${u.points}"></td>
       </tr>
     </tbody>
   </table>
@@ -109,8 +96,8 @@
     <p class="footer-p" >Database 2 optional project</p>
 </footer>
 
-<script src="../js/jquery-3.5.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
