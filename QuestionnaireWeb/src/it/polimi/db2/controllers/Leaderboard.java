@@ -24,7 +24,7 @@ import model.User;
 import services.MarketingQuestionService;
 import services.UserService;
 
-@WebServlet("/html/leaderboard")
+@WebServlet("/Leaderboard")
 public class Leaderboard extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;

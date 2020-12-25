@@ -22,8 +22,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" th:href="@{/Home}">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" th:href="@{/RetrieveVariableQuestions}">Questionnaire of the Day</a>
+        <a class="nav-item nav-link active" href="Home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="Leaderboard">Leaderboard</a>
+        <a class="nav-item nav-link" href="RetrieveVariableQuestions">Questionnaire of the Day</a>
       </div>
     </div>
     <!--  
@@ -36,7 +37,7 @@
     </form>
     -->
     <div class="form-inline my-2 my-lg-0">
-     <a class="nav-item nav-link" th:text="${session.username}"></a>
+     <p class="footer-p" th:text="${session.username}"></p>
     </div>
   </nav>
 

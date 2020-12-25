@@ -19,7 +19,7 @@ import services.ProductService;
 /**
  * Servlet implementation class CreateQuestionnaire
  */
-@WebServlet("/html/CreateQuestionnaire")
+@WebServlet("/CreateQuestionnaire")
 public class CreateQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
