@@ -13,17 +13,13 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import it.polimi.db2.controllers.PropagationI;
 
-/**
- * questo servlet viene richiamato tramite il submit button di fixedQuestions.html e submitterà i valori non solo delle fixedquestions
- * ma anche delle variable questions reindirizzato l'utente ad una pagina di ringraziamenti.
- */
+
 @WebServlet("/PropagationII")
 public class PropagationII extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
-	private PropagationI prop = new PropagationI();
+	private String [] answers_prop;
 
     public PropagationII() {
         super();
@@ -39,19 +35,46 @@ public class PropagationII extends HttpServlet {
 	}
 
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Sono entrato in doGet poichè ho cliccato il submit button");
-		Object[] answers_prop = (Object[]) request.getAttribute("answers");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Sono entrato nel doGet poichè richiamato");
+		answers_prop = (String[]) request.getAttribute("answers");
+		
 		for ( Object x : answers_prop) {
 			System.out.println(x);
-			System.out.println("bella");
 		}
+		
+		/*		
 		String path = "/html/greetings.html";
+		ServletContext servletContext = getServletContext();
+		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		templateEngine.process(path, ctx, response.getWriter());
+		*/
+				
+		String path = "/html/fixedQuestions.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		templateEngine.process(path, ctx, response.getWriter());
 	}
 
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Sono entrato in doPost poichè ho cliccato il submit button");
+		String gender = null;
+		String age = null;
+		String exp_lvl = null;
+		gender = request.getParameter("gender");
+		age = request.getParameter("age");
+		exp_lvl = request.getParameter("expertise");
+		System.out.println(gender);
+		System.out.println(age);
+		System.out.println(exp_lvl);
+		//Adesso che l'utente ha inserito tutte le informazioni posso inserire le risposte recuperate in PropagationI e le risposte alle statistical question
+		
+		
+		}
+		
+		
+		
+	}
 
-}
+

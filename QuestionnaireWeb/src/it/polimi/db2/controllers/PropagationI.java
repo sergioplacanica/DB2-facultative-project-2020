@@ -11,19 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import model.User;
 
-/*
- * Questo servlet viene richiamato tramite il Next Page di variableQuestions.html, serve a prendere le risposte alle domande displayate 
- * dinamicamente e a salvarle, dopodichè reinderezzerà alla parte di statistical question
- * dove sarà possibile tornare indietro (dunque viene richiamato non questo servlet bensì quello antecedente cioè RetrieveVariableQuestions
- * oppure un bottone di submit dove verranno aggiunte anche le statistical question e verranno mandate al db, il quale autonomamente calcolerà
- * anche il puteggio dell'user.
- */
+
 
 @WebServlet("/PropagationI")
 public class PropagationI extends HttpServlet {
@@ -55,16 +47,25 @@ public class PropagationI extends HttpServlet {
 		}
 		String[] answers = request.getParameterValues("answer");
 		
-		for (String x : answers) {
-			System.out.println(x);
-		}
+		//for (String x : answers) {
+		//	System.out.println(x);
+		//}
+
 		request.setAttribute("answers", answers);
-		//request.getRequestDispatcher("/PropagationII").include(request, response);
+		//System.out.println(request.getAttribute("answers"));
+		request.getRequestDispatcher("/PropagationII").include(request, response);
+		//RequestDispatcher rd = request.getRequestDispatcher("/PropagationII");
+		//rd.forward(request,response);
 		//String path = ctxpath + "/fixedQuestions.html";
+		
+		/*
+		System.out.println("sono passato di qui");
 		String path = "/html/fixedQuestions.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		templateEngine.process(path, ctx, response.getWriter());
+		System.out.println("sono passato di qui");
+		*/
 	}
 
 }
