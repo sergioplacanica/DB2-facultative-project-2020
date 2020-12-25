@@ -34,28 +34,29 @@
 	</nav>
 
 
-	<div class="container">
-		<form id="productForm" action="PropagationI" method="get">
-			<div class="form-row">
-				<div class="col-2"></div>
+    <div class="container">
+        <form id="productForm" action="PropagationI" method="get">
+            <div class="form-row" th:each="q : ${questions}">
+                <div class="col-2">
+                </div>
 
-				<div th:each="q : ${questions}"
-					th:value="${q.description}">
-					<label class="mr-sm-2 mt-4" for="inlineFormCustomSelect"
-						th:text="${q.description}">Question</label> <input type="text"
-						name="answer" class="form-control my-1 p-4 mb-4" placeholder="">
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="col-2"></div>
-				<div class="col-7">
-					<button type="submit" class="btn1 mt-4" id="modalRegister">Next
-						page</button>
-				</div>
-			</div>
-		</form>
-	</div>
+                <div class="col-7">
+                    <label class="mr-sm-2 mt-4" id="questions" for="inlineFormCustomSelect" th:text="${q.description}">Question</label>
+                    <input type="text" name="answer" class="form-control my-1 p-4 mb-4" placeholder="">
+                </div>
 
+            </div>
+        </form>
+	
+	            <div class="form-row">
+                <div class="col-2">
+                </div>
+                <div class="col-7">
+                    <button type="submit" form="productForm" class="btn1 mt-4 mb-4" id="modalRegister">Next page</button>
+                </div>
+            </div>
+            	</div>
+            
 
 
 

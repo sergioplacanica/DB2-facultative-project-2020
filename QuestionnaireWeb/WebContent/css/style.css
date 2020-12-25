@@ -150,3 +150,10 @@ footer{
     color: white;
     padding-top: 10px;
 }
+
+#questions{
+    color: rgb(202, 20, 20);
+    font-weight: bold;
+    font-size: 0.5cm;
+    font-family: Arial, Helvetica, sans-serif;
+}
