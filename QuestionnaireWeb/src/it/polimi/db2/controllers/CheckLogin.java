@@ -31,11 +31,11 @@ import org.apache.commons.lang3.StringEscapeUtils;
 @WebServlet("/CheckLogin")
 public class CheckLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//private TemplateEngine templateEngine;
+	private TemplateEngine templateEngine;
 	@EJB(name = "services/UserService")
 	UserService usrService;
        
-    /*public CheckLogin() {
+    public CheckLogin() {
         super();
     }
         
@@ -46,7 +46,7 @@ public class CheckLogin extends HttpServlet {
 		this.templateEngine = new TemplateEngine();
 		this.templateEngine.setTemplateResolver(templateResolver);
 		templateResolver.setSuffix(".html");
-	}*/
+	}
 	
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +59,6 @@ public class CheckLogin extends HttpServlet {
 			if (usrn == null || pwd == null || usrn.isEmpty() || pwd.isEmpty()) {
 				throw new Exception("Missing or empty credential value");
 			}
-
 		} catch (Exception e) {
 			//for debugging only e.printStackTrace();
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing credential value");
@@ -80,12 +79,16 @@ public class CheckLogin extends HttpServlet {
 		System.out.println(user);
 		String path;
 		if (user == null) {
-			//TODO: handle error message in the index.html
+			//TODO: handle unexistent user credentials
 			path = getServletContext().getContextPath() + "/index.html";
 			response.sendRedirect(path);
 		} else {		
+			//request.getSession().setAttribute("user", user);
+			//request.getSession().setAttribute("username", user.getUsername());
 			request.getSession().setAttribute("user", user);
-			path = getServletContext().getContextPath() + "/html/homepage.html";
+			String username = user.getUsername();
+			request.getSession().setAttribute("username", username);
+			path = getServletContext().getContextPath() + "/Home";
 			response.sendRedirect(path);
 		} 
 		

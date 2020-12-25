@@ -5,17 +5,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta charset="ISO-8859-1">
-  <title>Leaderboard</title>
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="../css/homepage.css">
-  <title>Hello, world!</title>
+  <title>Homepage</title>
+  <link rel="stylesheet" type="text/css" media="all" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" media="all" href="css/homepage.css">
 </head>
 
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
     <a class="navbar-brand" href="homepage.html">
-      <img src="../images/icon.svg" height="30" alt="">
+      <img src="../images/icon.svg" height="30" alt="" th:attr="src=@{/images/icon.svg}">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,11 +22,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="homepage.html">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="leaderboard.html">Leaderboard</a>
-        <a class="nav-item nav-link" href="createQuestionnaire.html">Product of the day</a>
+        <a class="nav-item nav-link active" th:href="@{/Home}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" th:href="@{/RetrieveVariableQuestions}">Questionnaire of the Day</a>
       </div>
     </div>
+    <!--  
     <form class="form-inline my-2 my-lg-0">
       <a class="nav-item nav-link" href="../index.html">Login</a>
       <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
@@ -35,6 +34,10 @@
         Register
       </button>
     </form>
+    -->
+    <div class="form-inline my-2 my-lg-0">
+     <a class="nav-item nav-link" th:text="${session.username}"></a>
+    </div>
   </nav>
 
 
@@ -44,7 +47,7 @@
       <div class="col-lg-7">
         <div class="col-lg-10">
           <h1>Product of the day</h1>
-          <img src="../images/lambo.jpg" class="img-fluid" alt="">
+          <img class = "img-fluid" src="images/lambo.jpg"/>
         </div>
 
       </div>

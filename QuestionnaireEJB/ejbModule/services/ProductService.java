@@ -23,9 +23,9 @@ public class ProductService {
 		em.persist(product);
 	}
 	
-	public List<Product> findProduct(Date date) {
+	public  Product findProduct(Date date) {
 		List<Product> products=em.createQuery("SELECT p FROM Product p WHERE p.date=?1", Product.class).setParameter(1, date).getResultList();
-		return products;
+		return products.get(0);
 	}
 
 }

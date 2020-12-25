@@ -21,7 +21,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import model.User;
-import services.QuestionnaireService;
+import services.MarketingQuestionService;
 import services.UserService;
 
 @WebServlet("/html/leaderboard")

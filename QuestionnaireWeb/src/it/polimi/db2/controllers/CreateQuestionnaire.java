@@ -46,7 +46,7 @@ public class CreateQuestionnaire extends HttpServlet {
 			String[] questions = request.getParameterValues("question");
 			for(String question : questions) {
 				System.out.println(question);
-				Product product=productService.findProduct(startDate).get(0);
+				Product product=productService.findProduct(startDate);
 				marketingQuestionService.createQuestion(question, product);
 			}
 		} catch (ParseException e) {
