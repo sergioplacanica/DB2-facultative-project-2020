@@ -36,14 +36,14 @@
 
 	<div class="container">
 		<form id="productForm" action="PropagationI" method="get">
-			<div class="form-row" th:each="q : ${questions}">
+			<div class="form-row" th:each="q, iter : ${questions}">
 				<div class="col-2"></div>
 
 				<div class="col-7">
 					<label class="mr-sm-2 mt-4" id="questions"
 						for="inlineFormCustomSelect" th:text="${q.description}">Question</label>
-					<input type="text" name="answer" class="form-control my-1 p-4 mb-4"
-						placeholder="">
+					<input type="text" th:name="${iter.index}" class="form-control my-1 p-4 mb-4"
+						placeholder="" >
 				</div>
 
 			</div>
