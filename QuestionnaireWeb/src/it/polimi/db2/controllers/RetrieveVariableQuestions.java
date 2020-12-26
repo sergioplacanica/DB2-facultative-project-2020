@@ -86,10 +86,10 @@ public class RetrieveVariableQuestions extends HttpServlet {
 		// retrieve the product associated with the current date and the marketing questions associated with the given product
 		try {
 			products = pService.findProduct(startDate);
-			System.out.println("Ho trovato il product con la data odierna"+products);
+			System.out.println("Ho trovato il product con la data odierna "+products);
 			questions = qService.retrieveQuestions(products);
 			for (Marketingquestion question : questions) {
-				System.out.println("Ho trovato le domande associate a tale product e sono"+question.getDescription());
+				System.out.println("Ho trovato le domande associate a tale product e sono " +question.getDescription());
 			}
 			//System.out.println("Ho trovato le domande associate a tale product e sono"+questions);
 		} catch (MarketingQuestionException e) {
