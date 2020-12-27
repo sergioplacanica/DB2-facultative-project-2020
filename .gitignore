@@ -100,5 +100,3 @@ QuestionnaireEJB/.classpath
 QuestionnaireEJB/ejbModule/META-INF/persistence.xml
 
 QuestionnaireWeb/.classpath
-
-QuestionnaireWeb/.project
