@@ -27,5 +27,10 @@ public class ProductService {
 		List<Product> products=em.createQuery("SELECT p FROM Product p WHERE p.date=?1", Product.class).setParameter(1, date).getResultList();
 		return products.get(0);
 	}
+	
+	public List<Product> findAll() {
+		List<Product> products=em.createNamedQuery("Product.findAll", Product.class).getResultList();
+		return products;
+	}
 
 }

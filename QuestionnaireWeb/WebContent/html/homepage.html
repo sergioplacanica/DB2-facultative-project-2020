@@ -15,30 +15,36 @@
 
 <body>
 
-	<nav class="navbar navbar-expand-lg navbar-dark "
-		style="background-color: black;">
-		<a class="navbar-brand" href="Home"> <img src="../images/icon.svg"
-			height="30" alt="" th:attr="src=@{/images/icon.svg}">
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-item nav-link active" href="Home">Home <span
-					class="sr-only">(current)</span></a> <a class="nav-item nav-link"
-					href="Leaderboard">Leaderboard</a> <a class="nav-item nav-link"
-					href="html/createQuestionnaire.html">Create Questionnaire</a> <a
-					class="nav-item nav-link" href="RetrieveVariableQuestions">Questionnaire
-					of the Day</a>
-			</div>
-		</div>
-		<div class="form-inline my-2 my-lg-0">
-			<p class="footer-p" th:text="${session.username}"></p>
-		</div>
-	</nav>
+  <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
+    <a class="navbar-brand" href="Home">
+      <img src="../images/icon.svg" height="30" alt="" th:attr="src=@{/images/icon.svg}">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="Home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="Leaderboard">Leaderboard</a>
+        <a class="nav-item nav-link" href="RetrieveVariableQuestions">Questionnaire of the Day</a>
+        <a th:if="${session.user.admin == true }" class="nav-item nav-link" href="html/createQuestionnaire.html">Administrative tools</a>
+   
+      </div>
+    </div>
+    <!--  
+    <form class="form-inline my-2 my-lg-0">
+      <a class="nav-item nav-link" href="../index.html">Login</a>
+      <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
+        data-target="#staticBackdrop">
+        Register
+      </button>
+    </form>
+    -->
+    <div class="form-inline my-2 my-lg-0">
+     <p class="footer-p" th:text="${session.username}"></p>
+    </div>
+  </nav>
 
 
 	<div class="container-fluid">

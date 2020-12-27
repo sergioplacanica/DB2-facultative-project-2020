@@ -31,7 +31,7 @@ public class TestConnection {
 
         //find an User by is id
         em.getTransaction().begin();
-        /*
+        
         User user = testService.findUser(1);
         System.out.println("found User:" + user);
         Offensiveword offensiveWord=new Offensiveword();
@@ -39,7 +39,7 @@ public class TestConnection {
         List<User> questions=em.createQuery("SELECT u FROM User u", User.class).getResultList();
         for (User q : questions) {
             System.out.println(q.getPassword());
-        } */
+        } 
         /*User user2 = usrService.checkCredentials("ciccio", "pass");
         System.out.println("tutto fatto"+user2);*/
         //em.persist(user);

@@ -80,6 +80,7 @@ public class CheckLogin extends HttpServlet {
 		String path;
 		if (user == null) {
 			//TODO: handle unexistent user credentials
+			
 			path = getServletContext().getContextPath() + "/index.html";
 			response.sendRedirect(path);
 		} else {		
@@ -90,6 +91,7 @@ public class CheckLogin extends HttpServlet {
 			request.getSession().setAttribute("username", username);
 			path = getServletContext().getContextPath() + "/Home";
 			response.sendRedirect(path);
+			
 		} 
 		
 	}

@@ -11,9 +11,10 @@ import java.util.List;
  */
 @Entity
 //@Table(name = "user", schema = "database")
-@NamedQueries({@NamedQuery(name="User.findAll", query="SELECT u FROM User u order by u.points desc"),
-@NamedQuery(name="User.checkCredentials", query="SELECT u FROM User u WHERE u.username= ?1 and u.password= ?2")}
-)
+@NamedQueries({
+	@NamedQuery(name="User.findAll", query="SELECT u FROM User u order by u.points desc"),
+	@NamedQuery(name="User.checkCredentials", query="SELECT u FROM User u WHERE u.username= ?1 and u.password= ?2")
+})
 
 
 public class User implements Serializable {
