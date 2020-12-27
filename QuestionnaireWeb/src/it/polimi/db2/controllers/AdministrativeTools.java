@@ -49,7 +49,7 @@ public class AdministrativeTools extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<Product> products = productService.findAll();
-		String path = "/html/AdministrativeTools.html";
+		String path = "/html/administration.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("products", products);

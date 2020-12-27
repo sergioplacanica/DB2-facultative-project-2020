@@ -2,7 +2,7 @@
 package services;
 
 import java.util.List;
-
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +20,18 @@ public class QuestionnaireService {
 	
 	public QuestionnaireService() {
 		
+	}
+	
+	public Questionnaire createQuestionnaire (Integer age, String exp_lvl, String gender, Date date, Product product, User user) {
+		Questionnaire questionnaire = new Questionnaire();
+		questionnaire.setAge(age);
+		questionnaire.setDate(date);
+		questionnaire.setExpertise_level(exp_lvl);
+		questionnaire.setSex(gender);
+		questionnaire.setUser(user);
+		questionnaire.setProduct(product);
+		em.persist(questionnaire);
+		return questionnaire;
 	}
 	
 	
@@ -51,14 +63,4 @@ public class QuestionnaireService {
 	
 }
 
-	public Questionnaire createQuestionnaire (Integer age, String exp_lvl, String gender, Date date, Product product, User user) {
-		Questionnaire questionnaire = new Questionnaire();
-		questionnaire.setAge(age);
-		questionnaire.setDate(date);
-		questionnaire.setExpertise_level(exp_lvl);
-		questionnaire.setSex(gender);
-		questionnaire.setUser(user);
-		questionnaire.setProduct(product);
-		em.persist(questionnaire);
-		return questionnaire;
-	}
+	
