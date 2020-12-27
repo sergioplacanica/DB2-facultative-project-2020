@@ -87,10 +87,14 @@ public class RetrieveVariableQuestions extends HttpServlet {
 		try {
 			products = pService.findProduct(startDate);
 			System.out.println("Ho trovato il product con la data odierna "+products);
+			request.getSession().setAttribute("product",products);
 			questions = qService.retrieveQuestions(products);
+			request.getSession().setAttribute("questions",questions);
+			/*
 			for (Marketingquestion question : questions) {
 				System.out.println("Ho trovato le domande associate a tale product e sono " +question.getDescription());
 			}
+			*/
 			//System.out.println("Ho trovato le domande associate a tale product e sono"+questions);
 		} catch (MarketingQuestionException e) {
 			//cannot retrieve the data 

@@ -1,6 +1,9 @@
 package it.polimi.db2.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,8 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
+import model.Answer;
+import model.AnswerPK;
+import model.Marketingquestion;
+import model.Product;
+import model.User;
 
 
 
@@ -21,7 +33,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 public class PropagationI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
-	//private String [] answers = null;
+	
 	public PropagationI() {
 		super();
 	}
@@ -32,7 +44,7 @@ public class PropagationI extends HttpServlet {
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		this.templateEngine = new TemplateEngine();
 		this.templateEngine.setTemplateResolver(templateResolver);
-		templateResolver.setSuffix(".html");
+		//templateResolver.setSuffix(".html");
 	}
 		
 
@@ -45,27 +57,25 @@ public class PropagationI extends HttpServlet {
 			response.sendRedirect(loginpath);
 			return;
 		}
-		String[] answers = request.getParameterValues("answer");
 		
-		//for (String x : answers) {
-		//	System.out.println(x);
-		//}
+		List <Marketingquestion> questions = (List <Marketingquestion>) request.getSession().getAttribute("questions");
+		List<String> answers_text= new ArrayList<String>();
+		for(int x=0 ; x< questions.size(); x++) {
+			System.out.println("ciao "+ request.getParameter(""+x));
+			answers_text.add(request.getParameter(""+x));
+		}
+		
+		request.getSession().setAttribute("answers", answers_text);
+		//System.out.println("le risposte ordinate sono: "+answer1 +" "+answer2+ " "+answer3);
+		//String[] answers = request.getParameterValues("answer");
+		//request.getSession().setAttribute("answers", answers);
+		String ctxpath = getServletContext().getContextPath();
+		String path = ctxpath + "/PropagationII";
+		response.sendRedirect(path);
+		
+		//request.setAttribute("answers", answers);
+		//request.getRequestDispatcher("/PropagationII").include(request, response);
 
-		request.setAttribute("answers", answers);
-		//System.out.println(request.getAttribute("answers"));
-		request.getRequestDispatcher("/PropagationII").include(request, response);
-		//RequestDispatcher rd = request.getRequestDispatcher("/PropagationII");
-		//rd.forward(request,response);
-		//String path = ctxpath + "/fixedQuestions.html";
-		
-		/*
-		System.out.println("sono passato di qui");
-		String path = "/html/fixedQuestions.html";
-		ServletContext servletContext = getServletContext();
-		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-		templateEngine.process(path, ctx, response.getWriter());
-		System.out.println("sono passato di qui");
-		*/
 	}
 
 }
