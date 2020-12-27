@@ -95,8 +95,7 @@ hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java
 
-QuestionnaireEJB/.classpath
+
 
 QuestionnaireEJB/ejbModule/META-INF/persistence.xml
 
-QuestionnaireWeb/.classpath
