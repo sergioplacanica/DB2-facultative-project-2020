@@ -14,6 +14,7 @@ import exceptions.MarketingQuestionException;
 import model.Answer;
 import model.AnswerPK;
 import model.Marketingquestion;
+import model.Offensiveword;
 import model.Product;
 import model.Questionnaire;
 
@@ -41,7 +42,7 @@ public class AnswerService {
 				answer.setAnswer_text(answers.get(i));
 				answer.setOffensive(false);
 				answer.setId(answerPK);
-				System.out.println("L'user che sto inserendo ha Answer_text:" +answer.getAnswer_text()+" Offensive: " +answer.getOffensive() +"AnswerPK object:" +answer.getId() +"answer QuestionID: "+answerPK.getQuestionID()+"answer ProductID: "+answerPK.getProductID()+"answer UserID: "+answerPK.getUserID());
+				//System.out.println("L'user che sto inserendo ha Answer_text:" +answer.getAnswer_text()+" Offensive: " +answer.getOffensive() +"AnswerPK object:" +answer.getId() +"answer QuestionID: "+answerPK.getQuestionID()+"answer ProductID: "+answerPK.getProductID()+"answer UserID: "+answerPK.getUserID());
 				em.persist(answer);
 				i = i+1;
 			}
@@ -50,11 +51,31 @@ public class AnswerService {
 			throw new AnswerException("Could not create the answers");		
 			}
 	}
-	/*
-	 * public void createQuestion(String question,Product product) {
-	 * Marketingquestion marketingQuestion=new Marketingquestion();
-	 * marketingQuestion.setDescription(question);
-	 * marketingQuestion.setProduct(product); em.persist(marketingQuestion); }
-	 */
+	
+	public boolean checkAnswers(List <String> answers) throws AnswerException{
+		List <Offensiveword> offensive = new ArrayList<Offensiveword>();
+		List <String> off = new ArrayList<String>();
+		List <String> list = new ArrayList<String>();
+		String [] splitted_answ = null;		
+		try {
+			offensive = em.createQuery("SELECT u FROM Offensiveword u",Offensiveword.class).getResultList();
+			for (Offensiveword x: offensive) {
+				off.add(x.getWord());
+			}			
+			for (String x: answers) {
+				splitted_answ = x.split(" ");
+				for(String i: splitted_answ) {
+					list.add(i);
+				}				
+			}
+			for(String x: off) {
+				if(list.contains(x))
+					return true;
+			}	
+		} catch (PersistenceException e) {
+			throw new AnswerException("Cannot retrieve Offensiveword ");
+		}
+		return false;
+	}
 
 }

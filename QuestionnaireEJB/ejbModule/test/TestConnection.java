@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -72,14 +73,50 @@ public class TestConnection {
         System.out.println(current_date);
         Date startDate = (Date) dtf.parse(current_date);
         System.out.println(startDate);
-        */
+       
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         String current_date = (String) dtf.format(now);
         Date startDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(current_date).getTime());
         System.out.println(startDate);
+*/
+        List <Offensiveword> offensive = new ArrayList<Offensiveword>();
+		List <String> off = new ArrayList<String>();
+		List <String> list = new ArrayList<String>();
+		String [] splitted_answ = null;
+		List <String> answers = new ArrayList<String>();
+		answers.add("Ciao questa è la prima cazzo");
+		answers.add("Ciao questa è la seconda risposta");
+		answers.add("Ciao questa è la terza risposta");
 
-        
+		
+		offensive = em.createQuery("SELECT u FROM Offensiveword u",Offensiveword.class).getResultList();
+		//creazione List<String> di offensive word
+		for (Offensiveword x: offensive) {
+			off.add(x.getWord());
+		}
+		
+		for(String x: off) {
+			System.out.println(x);
+		}
+		
+		for (String x: answers) {
+			splitted_answ = x.split(" ");
+			System.out.println(splitted_answ);
+			for(String i: splitted_answ) {
+				list.add(i);
+			}				
+		}
+
+		for(String x: list) {
+			System.out.println(x);
+		}
+		
+		for(String x: off) {
+			if(list.contains(x))
+				System.out.println("Conteneva almeno una parolaccia");
+		}
+
         
      
         

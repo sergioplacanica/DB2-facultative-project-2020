@@ -68,7 +68,7 @@ public class RetrieveVariableQuestions extends HttpServlet {
 		
 		//active session with logged user
 		//get current date to be passed to findProduct product service
-		//TODO: remember to handle different time zone
+		//TODO: verifica che non funziona se c'è un prodotto senza la data odierna, prima funzionava adesso non ne sei sicuro
 		List <Marketingquestion> questions = null;
 		Product products = null;
 		Date startDate = null;
@@ -85,7 +85,8 @@ public class RetrieveVariableQuestions extends HttpServlet {
 		}		
 		// retrieve the product associated with the current date and the marketing questions associated with the given product
 		try {
-			products = pService.findProduct(startDate);
+			System.out.println("Sto provando a trovare il prodotto grazie alla data odierna:"+startDate);
+			products = pService.findProductByDate(startDate);
 			System.out.println("Ho trovato il product con la data odierna "+products);
 			request.getSession().setAttribute("product",products);
 			questions = qService.retrieveQuestions(products);

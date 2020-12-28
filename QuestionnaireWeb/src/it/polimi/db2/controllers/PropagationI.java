@@ -61,7 +61,7 @@ public class PropagationI extends HttpServlet {
 		List <Marketingquestion> questions = (List <Marketingquestion>) request.getSession().getAttribute("questions");
 		List<String> answers_text= new ArrayList<String>();
 		for(int x=0 ; x< questions.size(); x++) {
-			System.out.println("ciao "+ request.getParameter(""+x));
+			//System.out.println("ciao "+ request.getParameter(""+x));
 			answers_text.add(request.getParameter(""+x));
 		}
 		
