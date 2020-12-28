@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import model.Product;
 import model.User;
@@ -28,8 +29,19 @@ public class ProductService {
 		return products.get(0);
 	}
 	
+	
+	public Product findProduct(int productID) {
+		List<Product> products=em.createQuery("SELECT p FROM Product p WHERE p.productID=?1", Product.class).setParameter(1, productID).getResultList();
+		return products.get(0);
+	}
+	
 	public List<Product> findAll() {
 		List<Product> products=em.createNamedQuery("Product.findAll", Product.class).getResultList();
+		return products;
+	}
+	
+	public List<Product> withActiveQuestionnaire() {
+		List<Product> products = em.createQuery("SELECT DISTINCT q.product FROM Questionnaire q", Product.class).getResultList();
 		return products;
 	}
 
