@@ -12,12 +12,14 @@ body {
 
 .card {
     border-radius: 30px;
-    background-color: #fff;
+    background-color: rgb(255, 253, 253);
     padding-left: 40px;
-    padding-right: 40px;
-    margin-top: 60px;
+    padding-right: 20px;
+    margin-top: 20px;
+    margin-right: 30px;
     padding-top: 20px;
-    padding-bottom: 10px
+    padding-bottom: 10px;
+
 }
 
 .blue-text {
@@ -26,7 +28,11 @@ body {
 
 h1{
     color: black;
-    text-align: center;
+    text-align: left;
+}
+
+p{
+    color: rgb(0, 0, 0);
 }
 
 footer{
@@ -44,3 +50,43 @@ footer{
     color: white;
     padding-top: 10px;
 }
+
+#row{
+    background-image: linear-gradient(rgb(221, 221, 221),rgb(10, 10, 10));
+    border-radius: 30px;
+    box-shadow: 12px 12px 22px black;
+    margin-left: -20px;
+    
+}
+img{
+    border-top-left-radius: 30px ;
+    border-bottom-left-radius: 30px ;
+    border-bottom-right-radius: 30px ;
+}
+
+.btn1{
+    border:none;
+    outline:none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+
+}
+
+#modalRegister{
+    background-color: rgb(34, 175, 34);
+}
+
+#modalRegister:hover{
+    background:rgb(22, 159, 22);
+    color: white;
+}
+
+#productOfTheDay{
+    height: 450px;
+}
+
+
