@@ -18,16 +18,7 @@
 
 		</div>
 	</div>
-	<!--  
-    <form class="form-inline my-2 my-lg-0">
-      <a class="nav-item nav-link" href="../index.html">Login</a>
-      <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
-        data-target="#staticBackdrop">
-        Register
-      </button>
-    </form>
-    -->
 	<div class="form-inline my-2 my-lg-0">
-		<p class="footer-p" th:text="${session.username}"></p>
+		<p id="loginName" th:text="${session.username}"></p>
 	</div>
 </nav>
