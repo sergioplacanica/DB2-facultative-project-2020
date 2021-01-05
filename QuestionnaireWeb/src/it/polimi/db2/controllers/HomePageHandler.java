@@ -1,6 +1,14 @@
 package it.polimi.db2.controllers;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -10,14 +18,21 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import model.Product;
+import model.Review;
 import model.User;
-
+import services.ProductService;
+import services.ReviewService;
 //import model.User;
 
 @WebServlet("/Home")
 public class HomePageHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
+    @EJB(name="services/ProductService")   
+	ProductService productService;
+    @EJB(name="services/ReviewService")   
+	ReviewService reviewService;
 
 	public HomePageHandler() {
 		super();
@@ -53,10 +68,26 @@ public class HomePageHandler extends HttpServlet {
 			response.sendRedirect(loginpath);
 			return;
 		}
+		Date startDate = null;
+		Product products = null;
+
+		try {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        LocalDateTime now = LocalDateTime.now();
+	        String current_date = (String) dtf.format(now);
+			startDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(current_date).getTime());
+			products = productService.findProductByDate(startDate);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<Review> reviews=reviewService.findReviewsOfAProduct(products);
 		String path = "html/homepage.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-		//if the run stops here you need to add ognl library
+		ctx.setVariable("product", products);
+		ctx.setVariable("reviews", reviews);
+
 		templateEngine.process(path, ctx, response.getWriter());
 	}
 
