@@ -31,7 +31,7 @@
       <div class="row no-gutters" id="row">
 
         <div class="col-lg-6">
-          <img src="images/koenigsegg.jpg" class="img-fluid" id="productOfTheDay" alt="">
+          <img th:src="'images/' + ${product.image}" src="images/koenigsegg.jpg" class="img-fluid" id="productOfTheDay" alt="">
 
         </div>
         <div class="col-lg-6">
@@ -42,10 +42,10 @@
           </div>
           <h2 th:text="${product.name}" class="mx-4">Name of the product </h2>
 
-          <form method="post">
+          <form action="CreateReview" method="post">
             <div class="form-group mx-4" style="margin-top: 1cm;">
               <label style="font-weight: bold; font-size: 20px;" for="exampleFormControlTextarea1">Review</label>
-              <textarea style="resize:none" class="form-control" placeholder="Write your review" id="exampleFormControlTextarea1" rows="7"
+              <textarea name="reviewText" style="resize:none" class="form-control" placeholder="Write your review" id="exampleFormControlTextarea1" rows="7"
                 required></textarea>
               <button type="submit" class="btn1 mt-4" id="modalRegister">Submit</button>
             </div>
@@ -81,20 +81,6 @@
                 something new and exciting for the first time.</p>
           </div>
 
-          <div class="card mb-4">
-            <div class="row d-flex justify-content-left">
-
-              <div class=""> <img class="profile-pic" src="images/default.jfif" height="34" width="34" alt=""> </div>
-              <h4 class="blue-text ml-2">Pino </h4>
-              <p class="content mt-2">Proin ac venenatis risus, non blandit est. Praesent imperdiet, ligula id mollis
-                molestie, massa magna molestie orci, et ornare metus ex ut arcu. Ut at quam eget ex tempor rutrum.
-                Curabitur porttitor eget elit vitae posuere. Nullam nec enim vel lectus pellentesque accumsan a interdum
-                dolor. Nullam ut semper purus. Ut sed sapien sed nulla faucibus hendrerit. Maecenas ultricies aliquam
-                magna, non viverra nulla. Quisque euismod vestibulum mollis. Suspendisse eleifend congue metus, vel
-                efficitur nisi consequat elementum. Suspendisse vitae felis nec purus ultricies pellentesque. Phasellus
-                dapibus tortor nec metus commodo gravida.</p>
-            </div>
-          </div>
         </div>
 
       </div>

@@ -1,5 +1,9 @@
 package services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +31,15 @@ public class ProductService {
 	public  Product findProductByDate(Date date) {
 		List<Product> products=em.createQuery("SELECT p FROM Product p WHERE p.date=?1", Product.class).setParameter(1, date).getResultList();
 		return products.get(0);
+	}
+	
+	public Product getProductOfTheDay() throws ParseException {
+		Date startDate = null;
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String current_date = (String) dtf.format(now);
+		startDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(current_date).getTime());
+		return findProductByDate(startDate);
 	}
 	
 	

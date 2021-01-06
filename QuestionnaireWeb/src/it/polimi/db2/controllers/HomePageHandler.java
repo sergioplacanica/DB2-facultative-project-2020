@@ -68,15 +68,11 @@ public class HomePageHandler extends HttpServlet {
 			response.sendRedirect(loginpath);
 			return;
 		}
-		Date startDate = null;
 		Product products = null;
 
 		try {
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	        LocalDateTime now = LocalDateTime.now();
-	        String current_date = (String) dtf.format(now);
-			startDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(current_date).getTime());
-			products = productService.findProductByDate(startDate);
+			products = productService.getProductOfTheDay();
+			System.out.println(products.getImage());
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
