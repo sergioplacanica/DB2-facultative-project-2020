@@ -49,6 +49,7 @@ public class Leaderboard extends HttpServlet{
 			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 			ctx.setVariable("users", users);
 			templateEngine.process(path, ctx, response.getWriter());
+			
 
 	}
 	

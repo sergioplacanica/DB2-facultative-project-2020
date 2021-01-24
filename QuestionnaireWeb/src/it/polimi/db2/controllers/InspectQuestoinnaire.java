@@ -14,11 +14,12 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import model.Product;
 import services.ProductService;
 
 
 //TODO basically everything
-@WebServlet("/InspectQuestoinnaire")
+@WebServlet("/InspectQuestionnaire")
 public class InspectQuestoinnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
@@ -43,7 +44,11 @@ public class InspectQuestoinnaire extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String productID = request.getParameter("productID");
+		Product product = productService.findProduct(Integer.parseInt(productID));
+		String path;
+		path = getServletContext().getContextPath() + "/inspectQuestionnaire.html";
+		response.sendRedirect(path);
 	}
 
 	
