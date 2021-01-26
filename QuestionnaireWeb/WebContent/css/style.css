@@ -22,6 +22,8 @@ body{
     box-shadow: 12px 12px 22px black;
 }
 
+
+
 img{
     border-top-left-radius: 30px ;
     border-bottom-left-radius: 30px ;
@@ -61,8 +63,25 @@ img{
 
 }
 
+.inspectBtn{
+	border:none;
+    outline:none;
+    height: 50px;
+    width: 100%;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
 .deleteBtn:hover{
     background: rgb(219, 0, 0);
+    border: 1px solid;
+    color: white;
+}
+
+.inspectBtn:hover{
+    background: rgb(0, 219, 0);
     border: 1px solid;
     color: white;
 }
@@ -167,4 +186,12 @@ td
 #cssTable td 
 {
     vertical-align: middle;
+}
+
+.row-custom {
+	background-color: rgba(255, 255, 255, 0.0);
+    border-radius: 0px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: none;	
 }

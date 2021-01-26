@@ -1,6 +1,7 @@
 package it.polimi.db2.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
@@ -11,39 +12,67 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import model.Answer;
+import model.Questionnaire;
+import services.AnswerService;
 import services.ProductService;
+import services.QuestionnaireService;
 
 
-//TODO basically everything
-@WebServlet("/InspectQuestoinnaire")
-public class InspectQuestoinnaire extends HttpServlet {
+@WebServlet("/InspectAnswers")
+public class InspectAnswers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
 	private TemplateEngine templateEngine;
 	
 	@EJB(name = "services/ProductService")
 	ProductService productService;   
     
+	@EJB(name = "services/QuestionnaireService")
+	QuestionnaireService questionnaireService;
 	
-    public InspectQuestoinnaire() {
-        super();
-        
-    }
+	@EJB(name = "services/AnswerService")
+	AnswerService answerService;
     
-    public void init() throws ServletException {
-		ServletContext servletContext = getServletContext();
+    public InspectAnswers() {
+        super();
+       
+    }
+
+    
+    public void init() {
+    	ServletContext servletContext = getServletContext();
 		ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		this.templateEngine = new TemplateEngine();
 		this.templateEngine.setTemplateResolver(templateResolver);
 		templateResolver.setSuffix(".html");
-	}
-
+    }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int productID = Integer.parseInt(request.getParameter("productID"));
+		int userID = Integer.parseInt(request.getParameter("userID"));
 		
+		
+		Questionnaire questionnaire = questionnaireService.findByPK(userID, productID);
+		
+		
+		
+		
+		
+		
+		ServletContext servletContext = getServletContext();
+		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		ctx.setVariable("quest", questionnaire);
+		
+		String path;
+		path = "/html/inspectAnswers.html";
+		
+		templateEngine.process(path, ctx, response.getWriter());
 	}
 
 	

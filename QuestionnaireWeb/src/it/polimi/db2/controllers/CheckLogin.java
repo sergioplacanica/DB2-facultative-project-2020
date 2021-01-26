@@ -76,7 +76,7 @@ public class CheckLogin extends HttpServlet {
 		}
 		// If the user exists, add info to the session and go to home page, otherwise
 		// show login page with error message
-		System.out.println(user);
+		
 		String path;
 		if (user == null) {
 			//TODO: handle unexistent user credentials
