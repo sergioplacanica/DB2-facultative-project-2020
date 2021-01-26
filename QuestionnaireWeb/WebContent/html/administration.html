@@ -23,12 +23,12 @@
 	function inspectQuestionnaire(prodID) {
 		url = window.location.href;
 		$.ajax({
-			url :'/Questionnaire/InspectQuestionnaire',
+			url : '/Questionnaire/InspectQuestionnaire',
 			type : 'get',
 			data : {
 				productID : prodID
 			},
-			
+
 		})
 	}
 
@@ -54,38 +54,51 @@
 
 	<div id="navbar"></div>
 
+	<div class="container">
+		<div class="row row-custom">
+			<h2>Questionnaires</h2>
+		</div>
+		<div class="row row-custom">
+			<table class="table table-hover table-dark" id="cssTable">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Questionnaire</th>
+						<th scope="col">Product</th>
+						<th scope="col">Date</th>
 
-	<table class="table table-hover table-dark" id="cssTable">
-		<thead>
-			<tr>
-				<th scope="col">Questionnaire</th>
-				<th scope="col">Product</th>
-				<th scope="col">Date</th>
-				
 
 
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="p,iter : ${products}"
-				th:id="table_row_ + ${p.productID}">
-				<td th:text="${iter.index}"></td>
-				<td th:text="${p.name}"></td>
-				<td th:text="${#dates.format(p.date, 'dd/MM/yyyy')}"></td>
-				<td>
-					<a class="btn btn-primary" th:href="@{/InspectQuestionnaire(productID =${p.productID})}">Inspect</a>
-					
-				</td>
-				<td>
-					<button
-						th:onclick="'javascript:deleteQuestionnaire(' + ${p.productID} + ')'"
-						type="submit" th:id="Delete_ + ${p.productID} " class="btn btn-danger">Delete
-					</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p,iter : ${products}"
+						th:id="table_row_ + ${p.productID}">
+						<td th:text="${iter.index}"></td>
+						<td th:text="${p.name}"></td>
+						<td th:text="${#dates.format(p.date, 'dd/MM/yyyy')}"></td>
+						<td><a class="btn btn-primary"
+							th:href="@{/InspectQuestionnaire(productID =${p.productID})}">Inspect</a>
 
+						</td>
+						<td>
+							<button
+								th:onclick="'javascript:deleteQuestionnaire(' + ${p.productID} + ')'"
+								type="submit" th:id="Delete_ + ${p.productID} "
+								class="btn btn-danger">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="row row-custom justify-content-end">
+			<div class="col-3">
+				<a class="btn btn-success btn-lg"
+				  th:href="@{/CreateQuestionnaire}">New questionnaire</a>
+			</div>
+		</div>
+	</div>
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
 		tabindex="-1" role="dialog" aria-labelledby="staticBackdrop"
 		aria-hidden="true">
@@ -140,7 +153,7 @@
 		<p class="footer-p">Database 2 optional project</p>
 	</footer>
 	<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-	
+
 </body>
 
 </html>

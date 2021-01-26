@@ -44,11 +44,22 @@ public class QuestionnaireService {
 		
 	}
 	
+	public Questionnaire findByPK(int userID, int productID) {
+		Questionnaire questionnaire;
+		TypedQuery<Questionnaire> query = em.createQuery("SELECT q FROM Questionnaire q WHERE q.user.userID = :userID and q.product.productID = :productID", Questionnaire.class);
+		questionnaire = query
+				.setParameter("userID", userID)
+				.setParameter("productID", productID)
+				.getSingleResult();
+		
+		return questionnaire;
+	}
+	
 	//return all the questionnaires for a specific product
 	public List<Questionnaire> findByProduct(Product product) {
 		List<Questionnaire> questionnaires;
-		TypedQuery<Questionnaire> query = em.createQuery("SELECT q FROM Questionnaire WHERE q.product.productID = ?1", Questionnaire.class);
-		questionnaires = query.setParameter(1, product.getProductID()).getResultList();
+		TypedQuery<Questionnaire> query = em.createQuery("SELECT q FROM Questionnaire q WHERE q.product = :product ", Questionnaire.class);
+		questionnaires = query.setParameter("product", product).getResultList();
 		return questionnaires;
 	}
 	
