@@ -50,13 +50,7 @@ public class HomePageHandler extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		/*String resourcePath = getServletContext().getContextPath() + "/index.html";
-		System.err.println(resourcePath);
-		HttpSession session = req.getSession();
-		if (session.isNew() || session.getAttribute("user") == null) {
-			res.sendRedirect(resourcePath);
-			return;
-		}*/
+		
 		// If the user is not logged in (not present in session) redirect to the login
 		String loginpath = getServletContext().getContextPath()+ "/index.html";
 		HttpSession session = request.getSession();
@@ -72,7 +66,13 @@ public class HomePageHandler extends HttpServlet {
 
 		try {
 			products = productService.getProductOfTheDay();
-			System.out.println(products.getImage());
+			if(products == null) {
+				String path = "html/noProduct.html";
+				ServletContext servletContext = getServletContext();
+				final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+				templateEngine.process(path, ctx, response.getWriter());
+				return;
+			}
 			
 		} catch (ParseException e) {
 			e.printStackTrace();

@@ -25,7 +25,7 @@ import services.ProductService;
 /**
  * Servlet implementation class CreateQuestionnaire
  */
-@WebServlet("/CreateQuestionnaire")
+@WebServlet("/AdministrativeTools/CreateQuestionnaire")
 public class CreateQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
@@ -68,8 +68,8 @@ public class CreateQuestionnaire extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		String ctxpath = getServletContext().getContextPath();
-		String path = ctxpath + "/html/createQuestionnaire.html";
+		
+		String path = "/QuestionnaireWeb/AdministrativeTools";
 		System.out.println(path);
 		response.sendRedirect(path);
 	}

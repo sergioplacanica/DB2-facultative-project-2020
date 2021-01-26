@@ -23,7 +23,7 @@ import services.ProductService;
 import services.QuestionnaireService;
 
 
-@WebServlet("/InspectAnswers")
+@WebServlet("/AdministrativeTools/InspectQuestionnaire/InspectAnswers")
 public class InspectAnswers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

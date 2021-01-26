@@ -7,33 +7,19 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta charset="ISO-8859-1">
 <title>Marketing questionnaire</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="/QuestionnaireWeb/css/style.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
 </head>
 
 <body style="background-color: white;">
-	<nav class="navbar navbar-expand-lg navbar-dark "
-		style="background-color: black;">
-		<a class="navbar-brand" href="Home"> <img src="images/icon.svg"
-			height="30" alt="">
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-item nav-link" href="Home">Home <span
-					class="sr-only">(current)</span></a>
-			</div>
-		</div>
-		<div class="form-inline my-2 my-lg-0">
-			<p class="footer-p" th:text="${session.username}"></p>
-		</div>
-	</nav>
 
 
+	<div id="navbar"></div>
 	<div class="container">
 		<form id="productForm" action="PropagationI" method="get">
 			<div class="form-row" th:each="q, iter : ${questions}">
@@ -42,8 +28,8 @@
 				<div class="col-7">
 					<label class="mr-sm-2 mt-4" id="questions"
 						for="inlineFormCustomSelect" th:text="${q.description}">Question</label>
-					<input type="text" th:name="${iter.index}" class="form-control my-1 p-4 mb-4"
-						placeholder="" >
+					<input type="text" th:name="${iter.index}"
+						class="form-control my-1 p-4 mb-4" placeholder="">
 				</div>
 
 			</div>
@@ -113,10 +99,15 @@
 	<footer>
 		<p class="footer-p">Database 2 optional project</p>
 	</footer>
+	<script src="/QuestionnaireWeb/js/jquery-3.5.1.min.js"></script>
+	<script src="/QuestionnaireWeb/js/bootstrap.min.js"></script>
+	<script>
+		$(function() {
+			$("#navbar").load("html/navbar.html");
 
-	<script src="../js/main.js"></script>
-	<script src="../js/jquery-3.5.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+		});
+	</script>
+
 </body>
 
 </html>

@@ -30,6 +30,10 @@ public class ProductService {
 	
 	public  Product findProductByDate(Date date) {
 		List<Product> products=em.createQuery("SELECT p FROM Product p WHERE p.date=?1", Product.class).setParameter(1, date).getResultList();
+		
+		if(products.isEmpty()) 
+			return null;
+		
 		return products.get(0);
 	}
 	
@@ -55,6 +59,8 @@ public class ProductService {
 	
 	public List<Product> withActiveQuestionnaire() {
 		List<Product> products = em.createQuery("SELECT DISTINCT q.product FROM Questionnaire q", Product.class).getResultList();
+		if(products.isEmpty()) 
+			return null;
 		return products;
 	}
 

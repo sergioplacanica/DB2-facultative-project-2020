@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark "
 	style="background-color: black;">
-	<a class="navbar-brand" href="Home"> <img src="images/icon.svg"
+	<a class="navbar-brand" href="/QuestionnaireWeb/Home"> <img src="/QuestionnaireWeb/images/icon.svg"
 		height="30" alt="">
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -12,10 +12,10 @@
 	
 	
 		<div class="navbar-nav">
-			<a class="nav-item nav-link active" href="Home">Home <span class="sr-only">(current)</span></a>
-			<a class="nav-item nav-link" href="Leaderboard">Leaderboard</a>
-			<a class="nav-item nav-link" href="RetrieveVariableQuestions">Questionnaire of the Day</a>
-			<a th:if="${session.user.admin == true }" class="nav-item nav-link" href="AdministrativeTools">Administrative Tools</a> 
+			<a class="nav-item nav-link active" href="/QuestionnaireWeb/Home">Home <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="/QuestionnaireWeb/Leaderboard">Leaderboard</a>
+			<a class="nav-item nav-link" href="/QuestionnaireWeb/RetrieveVariableQuestions">Questionnaire of the Day</a>
+			<a th:if="${session.user.admin == true }" class="nav-item nav-link" href="/QuestionnaireWeb/AdministrativeTools">Administrative Tools</a> 
 			<span class="navbar-text"> Navbar text with an inline element </span>
 		</div>
 	

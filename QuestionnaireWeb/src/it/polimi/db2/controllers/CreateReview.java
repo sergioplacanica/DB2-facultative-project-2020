@@ -40,6 +40,12 @@ public class CreateReview extends HttpServlet {
 		System.out.println("user logged: " +user.getUsername());
 		try {
 			Product productOfTheDay=productService.getProductOfTheDay();
+			if(productOfTheDay == null) {
+				String ctxpath = getServletContext().getContextPath();
+				String path = ctxpath + "/Home";
+				response.sendRedirect(path);
+				return;
+			}
 			System.out.println("product of the day: "+productOfTheDay.getName());
 			reviewService.createReview(user, reviewText, productOfTheDay);
 		} catch (ParseException e) {
