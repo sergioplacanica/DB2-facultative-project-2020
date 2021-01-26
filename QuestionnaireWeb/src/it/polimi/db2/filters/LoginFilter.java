@@ -20,10 +20,8 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import model.User;
 
-/**
- * Servlet Filter implementation class LoginFilter
- */
-@WebFilter("/AdministrativeTools")
+//This filter check for admin permissions
+@WebFilter("/AdministrativeTools/*")
 public class LoginFilter implements Filter {
 	private HttpServletRequest httpRequest;
 	private HttpServletResponse httpResponse;
@@ -45,12 +43,18 @@ public class LoginFilter implements Filter {
 		httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession(false);
 		
-        boolean isLoggedIn = (session != null && session.getAttribute("username") != null);
-        User user = (User) session.getAttribute("user");
-        if(!user.getAdmin()) {
-        	this.servletContext.log("You're not authorized");
-        	httpResponse.sendRedirect("Home");
+        if(session != null && session.getAttribute("user") != null) {
+        	User user = (User) session.getAttribute("user");
+        	if(!user.getAdmin()) {
+            	this.servletContext.log("You're not authorized");
+            	httpResponse.sendRedirect("Home");
+            	return;
+            }
+        } else {
+        	httpResponse.sendRedirect("/QuestionnaireWeb");
+        	return;
         }
+        
         
 		chain.doFilter(request, response);
 	}

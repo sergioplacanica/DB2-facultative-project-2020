@@ -25,7 +25,7 @@ import services.QuestionnaireService;
 
 
 //TODO basically everything
-@WebServlet("/InspectQuestionnaire")
+@WebServlet("/AdministrativeTools/InspectQuestionnaire")
 public class InspectQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private TemplateEngine templateEngine;
