@@ -38,11 +38,11 @@ public class Questionnaire implements Serializable {
 	private String sex;
 
 	//bi-directional many-to-one association to Answer
-	@OneToMany(mappedBy="questionnaire")
+	@OneToMany(mappedBy="questionnaire", fetch=FetchType.EAGER)
 	private List<Answer> answer;
 
 	//bi-directional many-to-one association to Product
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ProductID")
 	private Product product;
 

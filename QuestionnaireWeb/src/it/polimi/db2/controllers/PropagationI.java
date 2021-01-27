@@ -44,7 +44,7 @@ public class PropagationI extends HttpServlet {
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		this.templateEngine = new TemplateEngine();
 		this.templateEngine.setTemplateResolver(templateResolver);
-		//templateResolver.setSuffix(".html");
+		
 	}
 		
 
@@ -61,20 +61,17 @@ public class PropagationI extends HttpServlet {
 		List <Marketingquestion> questions = (List <Marketingquestion>) request.getSession().getAttribute("questions");
 		List<String> answers_text= new ArrayList<String>();
 		for(int x=0 ; x< questions.size(); x++) {
-			//System.out.println("ciao "+ request.getParameter(""+x));
+			
 			answers_text.add(request.getParameter(""+x));
 		}
 		
 		request.getSession().setAttribute("answers", answers_text);
-		//System.out.println("le risposte ordinate sono: "+answer1 +" "+answer2+ " "+answer3);
-		//String[] answers = request.getParameterValues("answer");
-		//request.getSession().setAttribute("answers", answers);
+		
 		String ctxpath = getServletContext().getContextPath();
 		String path = ctxpath + "/PropagationII";
 		response.sendRedirect(path);
 		
-		//request.setAttribute("answers", answers);
-		//request.getRequestDispatcher("/PropagationII").include(request, response);
+		
 
 	}
 

@@ -49,10 +49,15 @@ public class AdministrativeTools extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		List<Product> products = productService.withActiveQuestionnaire();
+		List<Product> futureProducts = productService.futureQuestionnaire();
+		
+		
+		
 		String path = "/html/administration.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("products", products);
+		ctx.setVariable("futureProducts", futureProducts);
 		templateEngine.process(path, ctx, response.getWriter());
 	}
 

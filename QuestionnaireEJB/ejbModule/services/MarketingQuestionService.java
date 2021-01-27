@@ -29,6 +29,8 @@ public class MarketingQuestionService {
 	
 	public List <Marketingquestion> retrieveQuestions(Product product) throws MarketingQuestionException {
 		List <Marketingquestion> qList;
+		if(product == null)
+			return null;
 		try {
 			qList = em.createQuery("SELECT u FROM Marketingquestion u where u.product.productID = ?1 ",Marketingquestion.class).setParameter(1, product.getProductID()).getResultList();			
 		} catch (PersistenceException e) {

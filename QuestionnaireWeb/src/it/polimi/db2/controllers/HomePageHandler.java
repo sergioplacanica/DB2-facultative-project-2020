@@ -23,7 +23,7 @@ import model.Review;
 import model.User;
 import services.ProductService;
 import services.ReviewService;
-//import model.User;
+
 
 @WebServlet("/Home")
 public class HomePageHandler extends HttpServlet {
@@ -44,7 +44,6 @@ public class HomePageHandler extends HttpServlet {
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		this.templateEngine = new TemplateEngine();
 		this.templateEngine.setTemplateResolver(templateResolver);
-		//templateResolver.setPrefix("WEB-INF/");
 		templateResolver.setSuffix(".html");
 	}
 
@@ -52,12 +51,11 @@ public class HomePageHandler extends HttpServlet {
 		
 		
 		// If the user is not logged in (not present in session) redirect to the login
-		String loginpath = getServletContext().getContextPath()+ "/index.html";
+		String loginpath = getServletContext().getContextPath()+ "/";
 		HttpSession session = request.getSession();
 		User username = (User) session.getAttribute("user");
-		System.out.println(username.getUsername());
-		//nel caso tu non riesca ad accedere ai dati di session basta che setti una variabile
-		//tramite ctx.setVariable("username",username.getUsername())
+		
+		
 		if (session.isNew() || session.getAttribute("user")== null) {
 			response.sendRedirect(loginpath);
 			return;

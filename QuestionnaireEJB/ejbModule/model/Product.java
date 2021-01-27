@@ -32,7 +32,7 @@ public class Product implements Serializable {
 	private Date date;
 
 	//bi-directional many-to-one association to Questionnaire 
-	@OneToMany(mappedBy="product")
+	@OneToMany(mappedBy="product", fetch=FetchType.EAGER)
 	private List<Questionnaire> questionnaires;
 
 	//bi-directional many-to-one association to Review
@@ -40,7 +40,7 @@ public class Product implements Serializable {
 	private List<Review> reviews;
 	
 	//bi-directional many-to-one association to MarketingQuestion
-	@OneToMany(mappedBy="product")
+	@OneToMany(mappedBy="product", cascade=CascadeType.REMOVE)
 	private List<Marketingquestion> marketingQuestion;
 	
 

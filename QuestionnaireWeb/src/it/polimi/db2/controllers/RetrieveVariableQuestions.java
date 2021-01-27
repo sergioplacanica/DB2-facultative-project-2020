@@ -58,7 +58,7 @@ public class RetrieveVariableQuestions extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String loginpath = getServletContext().getContextPath() + "/index.html";
+		String loginpath = getServletContext().getContextPath() + "/";
 		
 		HttpSession session = request.getSession();
 		if (session.isNew() || session.getAttribute("user") == null) {
@@ -66,9 +66,7 @@ public class RetrieveVariableQuestions extends HttpServlet {
 			return;
 		}
 		
-		//active session with logged user
-		//get current date to be passed to findProduct product service
-		//TODO: verifica che non funziona se c'è un prodotto senza la data odierna, prima funzionava adesso non ne sei sicuro
+		
 		List <Marketingquestion> questions = null;
 		Product products = null;
 		Date startDate = null;
@@ -78,25 +76,26 @@ public class RetrieveVariableQuestions extends HttpServlet {
 	        LocalDateTime now = LocalDateTime.now();
 	        String current_date = (String) dtf.format(now);
 			startDate = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(current_date).getTime());
-			System.out.println(startDate);
+			
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			//e1.printStackTrace();
+			
 		}		
 		// retrieve the product associated with the current date and the marketing questions associated with the given product
 		try {
-			System.out.println("Sto provando a trovare il prodotto grazie alla data odierna:"+startDate);
+			
 			products = pService.findProductByDate(startDate);
-			System.out.println("Ho trovato il product con la data odierna "+products);
+			if(products == null) {
+				String path = "/html/noProduct.html";
+				ServletContext servletContext = getServletContext();
+				final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+				templateEngine.process(path, ctx, response.getWriter());
+				return;
+				
+			}
 			request.getSession().setAttribute("product",products);
 			questions = qService.retrieveQuestions(products);
 			request.getSession().setAttribute("questions",questions);
-			/*
-			for (Marketingquestion question : questions) {
-				System.out.println("Ho trovato le domande associate a tale product e sono " +question.getDescription());
-			}
-			*/
-			//System.out.println("Ho trovato le domande associate a tale product e sono"+questions);
+			
 		} catch (MarketingQuestionException e) {
 			//cannot retrieve the data 
 			return;

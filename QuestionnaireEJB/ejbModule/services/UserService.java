@@ -49,7 +49,7 @@ public class UserService {
 	}
 	
 	public void createUser(String username, String password, String email) throws UsernameException {
-		System.out.println(em);
+		
 		User user = new User(username, password, email);
 		user.setAdmin(false);
 		user.setBlocked(false);
@@ -59,6 +59,17 @@ public class UserService {
 		catch(Exception e){
 			throw new UsernameException("This username has been already used");
 		}
+	}
+	
+	public boolean alreadyTaken(String username, String email) {
+		Boolean taken = !em.createQuery("SELECT u from User u where u.username = ?1 OR u.email = ?2", User.class)
+				.setParameter(1, username)
+				.setParameter(2, email)
+				.getResultList()
+				.isEmpty();
+		
+		
+		return taken;
 	}
 	
 	public List<User> findAllUsers() {

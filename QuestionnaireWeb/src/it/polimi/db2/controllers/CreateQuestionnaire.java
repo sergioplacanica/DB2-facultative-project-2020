@@ -51,17 +51,33 @@ public class CreateQuestionnaire extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String productName= request.getParameter("productName");
-		System.out.println(productName);
 		String imagePath=request.getParameter("imagePath");
-		System.out.println(imagePath);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date startDate;
 		try {
-			Date startDate = (Date) sdf.parse(request.getParameter("date"));
-			System.out.println(startDate);
+			startDate = (Date) sdf.parse(request.getParameter("date"));
+			
+			if(productService.alreadyScheduled(startDate)) {
+				String path = "/html/noProduct.html";
+				ServletContext servletContext = getServletContext();
+				final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+				templateEngine.process(path, ctx, response.getWriter());
+				return;
+			}
+		} catch (ParseException e1) {
+			
+			e1.printStackTrace();
+		}
+		
+		
+		
+		try {
+			startDate = (Date) sdf.parse(request.getParameter("date"));
 			productService.createProduct(productName, imagePath,startDate);
 			String[] questions = request.getParameterValues("question");
 			for(String question : questions) {
-				System.out.println(question);
+				
 				Product product=productService.findProductByDate(startDate);
 				marketingQuestionService.createQuestion(question, product);
 			}
@@ -70,7 +86,6 @@ public class CreateQuestionnaire extends HttpServlet {
 		}
 		
 		String path = "/QuestionnaireWeb/AdministrativeTools";
-		System.out.println(path);
 		response.sendRedirect(path);
 	}
 	

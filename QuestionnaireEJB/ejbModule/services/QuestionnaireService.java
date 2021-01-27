@@ -55,6 +55,18 @@ public class QuestionnaireService {
 		return questionnaire;
 	}
 	
+	public Boolean alreadyCompiled(int userID, int productID) {
+		Boolean compiled;
+		TypedQuery<Questionnaire> query = em.createQuery("SELECT q FROM Questionnaire q WHERE q.user.userID = :userID and q.product.productID = :productID", Questionnaire.class);
+		compiled = !query
+				.setParameter("userID", userID)
+				.setParameter("productID", productID)
+				.getResultList()
+				.isEmpty();
+		
+		return compiled;
+	}
+	
 	//return all the questionnaires for a specific product
 	public List<Questionnaire> findByProduct(Product product) {
 		List<Questionnaire> questionnaires;

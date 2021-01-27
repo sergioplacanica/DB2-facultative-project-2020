@@ -57,7 +57,7 @@ public class PropagationII extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//System.out.println("Sono entrato nel doGet di PropII poichè richiamato da PropI");
+		//System.out.println("Sono entrato nel doGet di PropII poichï¿½ richiamato da PropI");
 		String path = "/html/fixedQuestions.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
@@ -77,23 +77,34 @@ public class PropagationII extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 		Product product = (Product) request.getSession().getAttribute("product");
 		List<Marketingquestion> questions = (List<Marketingquestion>) request.getSession().getAttribute("questions");
-		List <String >answers_prop = (List <String>) request.getSession().getAttribute("answers");		
+		List <String>answers_prop = (List <String>) request.getSession().getAttribute("answers");		
 		userID = user.getUserID();
 		productID = product.getProductID();
 		
 		
-		//check sullo stato bannato dell'utente in sessione, se è bannato response.sendError. se non lo è verifichiamo se le sue risposte
+		//check sullo stato bannato dell'utente in sessione, se ï¿½ bannato response.sendError. se non lo ï¿½ verifichiamo se le sue risposte
 		//alle domande contengono parole offensive, se le contengono l'utente viene bannato e saltiamo a response.sendError
-		//se invece non contengono parolacce creiamo dapprima il questionario e dopodichè inseriamo le risposte.
+		//se invece non contengono parolacce creiamo dapprima il questionario e dopodichï¿½ inseriamo le risposte.
+		
+		if(qService.alreadyCompiled(userID, productID)) {
+			
+			String path = "/html/noProduct.html";
+			ServletContext servletContext = getServletContext();
+			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+			templateEngine.process(path, ctx, response.getWriter());
+			return;
+		}
+		
+		
 		
 		if(user.getBlocked()==false) {
-			System.out.println("Ho verificato che l'utente non risulta essere blocked");
+			
 			try {
 				boolean ret = ansService.checkAnswers(answers_prop);
 				if (ret == false) {
-					System.out.println("Sono in PropII ed ho verificato che le offensiveword sono assenti sto dunque procedendo alla creazione del questionario: "+ret);
+					
 					Questionnaire questionnaire = qService.createQuestionnaire(age, exp_lvl, gender, product.getDate(), product, user);
-					System.out.println("Sono in PropII ho creato il questionario sto procedendo all'inserimento delle risposte");
+					
 					ansService.createAnswers(userID, productID, questions, answers_prop, questionnaire );
 					String path = "/html/greetings.html";
 					ServletContext servletContext = getServletContext();
@@ -119,25 +130,5 @@ public class PropagationII extends HttpServlet {
 	}
 	
 	
-	/*
-	 * 
-	 * Questionnaire questionnaire = qService.createQuestionnaire(age, exp_lvl, gender, product.getDate(), product, user);
-	 * List<Marketingquestion> questions = (List<Marketingquestion>) request.getSession().getAttribute("questions");
-		List <String >answers_prop = (List <String>) request.getSession().getAttribute("answers");		
-		userID = user.getUserID();
-		productID = product.getProductID();
-
-		try {
-			ansService.createAnswers(userID, productID, questions, answers_prop, questionnaire );
-		} catch (Exception e) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing credential value");
-			return;
-		}
-
-		String path = "/html/greetings.html";
-		ServletContext servletContext = getServletContext();
-		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-		templateEngine.process(path, ctx, response.getWriter());
-	 */
 
 }

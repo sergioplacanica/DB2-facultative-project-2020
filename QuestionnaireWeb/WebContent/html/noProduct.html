@@ -1,10 +1,35 @@
 <!DOCTYPE html>
 <html>
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>no product</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="/QuestionnaireWeb/css/homepage.css">
+<script src="/QuestionnaireWeb/js/jquery-3.5.1.min.js"></script>
+<script>
+	$(function() {
+		$("#navbar").load("/QuestionnaireWeb/html/navbar.html");
+		console.log("executed");
+	});
+</script>
 </head>
 <body>
-<h1>We are sorry, no product for today !</h1>
+	<div id="navbar"></div>
+	<h1>We are sorry, no product for today !</h1>
+	<footer>
+		<p class="footer-p">Database 2 optional project</p>
+	</footer>
+	<script src="/QuestionnaireWeb/js/homepage.js"></script>
 </body>
 </html>
