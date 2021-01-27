@@ -16,23 +16,18 @@ import java.util.List;
 public class Accesstime implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int acessTimeID;
+	
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="Access_time")
 	private Date access_time;
 
 	//bi-directional many-to-many association to User
-	@ManyToMany
-	@JoinTable(
-		name="Accesslog"
-		, joinColumns={
-			@JoinColumn(name="Access_time")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="UserID")
-			}
-		)
-	private List<User> users;
+	@ManyToOne
+	@JoinColumn(name="user")
+	private User user;
 
 	public Accesstime() {
 	}
@@ -45,12 +40,12 @@ public class Accesstime implements Serializable {
 		this.access_time = access_time;
 	}
 
-	public List<User> getUsers() {
-		return this.users;
+	public User getUser() {
+		return this.user;
 	}
 
-	public void setUsers(List<User> users) {
-		this.users = users;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

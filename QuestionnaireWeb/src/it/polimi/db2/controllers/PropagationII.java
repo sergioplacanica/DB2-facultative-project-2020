@@ -37,7 +37,7 @@ public class PropagationII extends HttpServlet {
 
 	@EJB(name = "services/AnswerService")
 	AnswerService ansService;
-	
+
 	@EJB(name = "services/UserService")
 	UserService usrService;
 
@@ -54,16 +54,15 @@ public class PropagationII extends HttpServlet {
 		templateResolver.setSuffix(".html");
 	}
 
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//System.out.println("Sono entrato nel doGet di PropII poich� richiamato da PropI");
+		// System.out.println("Sono entrato nel doGet di PropII poich� richiamato da
+		// PropI");
 		String path = "/html/fixedQuestions.html";
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		templateEngine.process(path, ctx, response.getWriter());
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -80,11 +79,6 @@ public class PropagationII extends HttpServlet {
 		List <String>answers_prop = (List <String>) request.getSession().getAttribute("answers");		
 		userID = user.getUserID();
 		productID = product.getProductID();
-		
-		
-		//check sullo stato bannato dell'utente in sessione, se � bannato response.sendError. se non lo � verifichiamo se le sue risposte
-		//alle domande contengono parole offensive, se le contengono l'utente viene bannato e saltiamo a response.sendError
-		//se invece non contengono parolacce creiamo dapprima il questionario e dopodich� inseriamo le risposte.
 		
 		if(qService.alreadyCompiled(userID, productID)) {
 			
@@ -110,19 +104,19 @@ public class PropagationII extends HttpServlet {
 					ServletContext servletContext = getServletContext();
 					final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 					templateEngine.process(path, ctx, response.getWriter());
-				}
-				else {
-					response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Offensiveword in the answers, now you're banned");
-					//TODO: funzione di ban dell'utente
+				} else {
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+							"Offensiveword in the answers, now you're banned");
+					// TODO: funzione di ban dell'utente
+					usrService.banUser(user);
 					System.out.println("Fai finta che ho bloccato l'utente");
 					return;
 				}
 			} catch (Exception e) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing credential value");
 				return;
-			}		
-		}
-		else {
+			}
+		} else {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Banned user cannot insert questionnaire");
 			return;
 		}
@@ -130,5 +124,25 @@ public class PropagationII extends HttpServlet {
 	}
 	
 	
+	/*
+	 * 
+	 * Questionnaire questionnaire = qService.createQuestionnaire(age, exp_lvl, gender, product.getDate(), product, user);
+	 * List<Marketingquestion> questions = (List<Marketingquestion>) request.getSession().getAttribute("questions");
+		List <String >answers_prop = (List <String>) request.getSession().getAttribute("answers");		
+		userID = user.getUserID();
+		productID = product.getProductID();
+
+		try {
+			ansService.createAnswers(userID, productID, questions, answers_prop, questionnaire );
+		} catch (Exception e) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing credential value");
+			return;
+		}
+
+		String path = "/html/greetings.html";
+		ServletContext servletContext = getServletContext();
+		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+		templateEngine.process(path, ctx, response.getWriter());
+	 */
 
 }
