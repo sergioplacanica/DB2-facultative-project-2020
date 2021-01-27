@@ -66,6 +66,9 @@ public class UserService {
 		 return users;
 	}
 	
-	
+	public void banUser(User user) {
+		user.setBlocked(true);
+		em.merge(user);
+	}
 
 }

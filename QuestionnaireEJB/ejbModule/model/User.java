@@ -43,7 +43,7 @@ public class User implements Serializable {
 	private int points;
 
 	//bi-directional many-to-many association to Accesstime
-	@ManyToMany(mappedBy="users")
+	@OneToMany(mappedBy="user")
 	private List<Accesstime> accesstimes;
 
 	//bi-directional many-to-one association to Questionnaire
