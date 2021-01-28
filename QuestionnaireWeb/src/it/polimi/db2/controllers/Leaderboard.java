@@ -44,6 +44,7 @@ public class Leaderboard extends HttpServlet{
 			throws ServletException, IOException {
 	
 			List<User> users=userService.findAllUsers();
+			users.forEach(u -> System.out.println(u.getUsername() + "  " + u.getPoints()));
 			String path = "/html/leaderboard.html";
 			ServletContext servletContext = getServletContext();
 			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());

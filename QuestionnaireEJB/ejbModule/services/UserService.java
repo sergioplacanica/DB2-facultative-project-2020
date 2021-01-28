@@ -74,6 +74,7 @@ public class UserService {
 	
 	public List<User> findAllUsers() {
 		 List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
+		 users.forEach(u -> em.refresh(u));
 		 return users;
 	}
 	
