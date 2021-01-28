@@ -64,6 +64,8 @@ public class DeleteQuestionnaire extends HttpServlet {
 		Product product = productService.findProduct(Integer.parseInt(productID));
 		
 		questService.deleteByProduct(product);
+		productService.deleteProduct(product);
+		
 		
 	}
 

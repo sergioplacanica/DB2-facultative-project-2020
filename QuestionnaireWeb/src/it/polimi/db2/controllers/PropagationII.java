@@ -69,10 +69,23 @@ public class PropagationII extends HttpServlet {
 		// variables for the creation of answers and questionnaire
 		Integer userID = null;
 		Integer productID = null;
-
+		
 		String gender = request.getParameter("gender");
-		int age = Integer.parseInt(request.getParameter("age"));
+		String ageStr = request.getParameter("age");
 		String exp_lvl = request.getParameter("expertise");
+		
+		if(gender == "" | ageStr == "" | exp_lvl == "") {
+			String path = "/html/noProduct.html";
+			ServletContext servletContext = getServletContext();
+			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+			ctx.setVariable("error", "You must complete all form fields to submit the questionnaire !");
+			templateEngine.process(path, ctx, response.getWriter());
+			return;
+		}
+		
+		gender = request.getParameter("gender");
+		int age = Integer.parseInt(ageStr);
+		exp_lvl = exp_lvl;
 		User user = (User) request.getSession().getAttribute("user");
 		Product product = (Product) request.getSession().getAttribute("product");
 		List<Marketingquestion> questions = (List<Marketingquestion>) request.getSession().getAttribute("questions");

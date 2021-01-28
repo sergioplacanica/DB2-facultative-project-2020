@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import model.Product;
+import model.Questionnaire;
 import model.User;
 
 @Stateless
@@ -90,5 +91,10 @@ public class ProductService {
 		return scheduled;
 		
 		
+	}
+	
+	public void deleteProduct(Product p) {
+		TypedQuery<Product> query = em.createQuery("DELETE FROM Product  WHERE productID = ?1", Product.class);
+		int deleted = query.setParameter(1, p.getProductID()).executeUpdate();
 	}
 }
