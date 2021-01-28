@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<nav class="navbar navbar-expand-lg navbar-dark "
+<!-- <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark "
 	style="background-color: black;">
 	<a class="navbar-brand" href="/QuestionnaireWeb/Home"> <img
 		src="/QuestionnaireWeb/images/icon.svg" height="30" alt="">
@@ -25,19 +25,40 @@
 				href="/QuestionnaireWeb/AdministrativeTools">Administrative
 				Tools</a>
 		</div>
+		<form class="form-inline my-2 my-lg-0">
+			<a class="nav-item nav-link" href="#">Login</a>
 
-	<!--  
+			<button type="button" class="btn btn-outline-success my-2 my-sm-0"
+				data-toggle="modal" data-target="#staticBackdrop">Register
+			</button>
+		</form>
+</nav> -->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark " style="background-color:black;">
+    <a class="navbar-brand" href="/QuestionnaireWeb/Home">
+      <img src="/QuestionnaireWeb/images/icon.svg" id="lambo" height="30" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/QuestionnaireWeb/Home">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/QuestionnaireWeb/Leaderboard">Leaderboard</a>
+        <a class="nav-item nav-link" href="/QuestionnaireWeb/RetrieveVariableQuestions">Questionnaire of the Day</a>
+        <a class="nav-item nav-link" th:if="${session.user.admin == true }" href="/QuestionnaireWeb/AdministrativeTools">Administration</a>
+      </div>
+    </div>
     <form class="form-inline my-2 my-lg-0">
-      <a class="nav-item nav-link" href="../index.html">Login</a>
-      <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal"
-        data-target="#staticBackdrop">
+      <a th:if="${session.username == null}" class="nav-item nav-link" href="#">Login</a>
+      
+      <button th:if="${session.username == null}" type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
         Register
       </button>
+      <button th:if="${session.username != null}" type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
+        Log out
+      </button>
     </form>
-    
-	<div class="form-inline my-2 my-lg-0">
-		<p id="loginName" th:text="${session.username}"></p>
-	</div>
-	-->
-</nav>
+  </nav>
+
 </html>

@@ -19,7 +19,7 @@
 <body style="background-color: white;">
 
 
-	<div id="navbar"></div>
+	<div th:replace="html/navbar.html :: navbar"></div>
 	<div class="container">
 		<form id="productForm" action="PropagationI" method="get">
 			<div class="form-row" th:each="q, iter : ${questions}">
