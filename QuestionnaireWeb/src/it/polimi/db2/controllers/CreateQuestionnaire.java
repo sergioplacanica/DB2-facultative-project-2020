@@ -62,6 +62,7 @@ public class CreateQuestionnaire extends HttpServlet {
 				String path = "/html/noProduct.html";
 				ServletContext servletContext = getServletContext();
 				final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+				ctx.setVariable("error", "a questionnaire for the specified date is already present !");
 				templateEngine.process(path, ctx, response.getWriter());
 				return;
 			}

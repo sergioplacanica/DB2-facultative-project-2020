@@ -26,7 +26,14 @@
 </head>
 <body>
 	<div th:replace="html/navbar.html :: navbar"></div>
-	<h1>We are sorry, no product for today !</h1>
+	<div class="container text-center">
+		<div class="h-100 row align-items-center">
+			<div class="row row-custom">
+				<h1 style="font-color: black" th:text=${error}>Generic</h1>
+			</div>
+			
+		</div>
+	</div>
 	<footer>
 		<p class="footer-p">Database 2 optional project</p>
 	</footer>

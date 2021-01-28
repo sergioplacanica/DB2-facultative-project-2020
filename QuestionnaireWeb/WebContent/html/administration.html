@@ -59,14 +59,7 @@
 				</tbody>
 			</table>
 		</div>
-
-		<div class="row row-custom justify-content-end">
-			<div class="col-3">
-				<a class="btn btn-success btn-lg"
-					th:href="@{/AdministrativeTools/CreateQuestionnaire}">New
-					questionnaire</a>
-			</div>
-		</div>
+		
 		<div class="row row-custom">
 			<h2>Programmed Questionnaire</h2>
 		</div>
@@ -88,8 +81,8 @@
 						<td th:text="${iter.index}"></td>
 						<td th:text="${p.name}"></td>
 						<td th:text="${#dates.format(p.date, 'dd/MM/yyyy')}"></td>
-						<td><a class="btn btn-primary"
-							th:href="@{/AdministrativeTools/InspectQuestionnaire(productID =${p.productID})}">Inspect</a>
+						<td><a class="btn btn-primary" style="visibility: hidden"
+							>Inspect</a>
 
 						</td>
 						<td>
@@ -102,7 +95,17 @@
 				</tbody>
 			</table>
 		</div>
+		<div class="row row-custom justify-content-end">
+			<div class="">
+				<a class="btn btn-success btn-lg"
+					th:href="@{/AdministrativeTools/CreateQuestionnaire}">New
+					questionnaire</a>
+			</div>
+		</div>
 	</div>
+
+		
+		
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static"
 		tabindex="-1" role="dialog" aria-labelledby="staticBackdrop"
 		aria-hidden="true">

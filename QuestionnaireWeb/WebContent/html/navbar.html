@@ -44,20 +44,15 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link active" href="/QuestionnaireWeb/Home">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="/QuestionnaireWeb/Leaderboard">Leaderboard</a>
-        <a class="nav-item nav-link" href="/QuestionnaireWeb/RetrieveVariableQuestions">Questionnaire of the Day</a>
-        <a class="nav-item nav-link" th:if="${session.user.admin == true }" href="/QuestionnaireWeb/AdministrativeTools">Administration</a>
+        <a class="nav-item nav-link active" href="/QuestionnaireWeb/Leaderboard">Leaderboard <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" th:if="${session.user != null}" href="/QuestionnaireWeb/RetrieveVariableQuestions">Questionnaire of the Day <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link active" th:if="${session.user != null && session.user.admin == true }" href="/QuestionnaireWeb/AdministrativeTools">Administration <span class="sr-only">(current)</span></a>
       </div>
     </div>
     <form class="form-inline my-2 my-lg-0">
-      <a th:if="${session.username == null}" class="nav-item nav-link" href="#">Login</a>
-      
-      <button th:if="${session.username == null}" type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
-        Register
-      </button>
-      <button th:if="${session.username != null}" type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#staticBackdrop">
-        Log out
-      </button>
+      <p th:if="${session.username != null}" style="padding-right: 10px" class="footer-p" th:text="${session.username}"></p> 
+      <a th:if="${session.username != null}" href="/QuestionnaireWeb/Logout" class="btn btn-primary" >Logout</a>
+        
     </form>
   </nav>
 

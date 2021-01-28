@@ -49,7 +49,7 @@ public class Registration extends HttpServlet {
 			String path = "/html/noProduct.html";
 			ServletContext servletContext = getServletContext();
 			final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
-			
+			ctx.setVariable("error", "Username or Email already in use");
 			templateEngine.process(path, ctx, response.getWriter());
 			return;
 		}

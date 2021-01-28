@@ -88,6 +88,7 @@ public class RetrieveVariableQuestions extends HttpServlet {
 				String path = "/html/noProduct.html";
 				ServletContext servletContext = getServletContext();
 				final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
+				ctx.setVariable("error", "We're sorry, there's no scheduled questionnaire for today!");
 				templateEngine.process(path, ctx, response.getWriter());
 				return;
 				

@@ -58,7 +58,7 @@ public class ProductService {
 	}
 	
 	public List<Product> withActiveQuestionnaire() {
-		List<Product> products = em.createQuery("SELECT DISTINCT q.product FROM Questionnaire q", Product.class).getResultList();
+		List<Product> products = em.createQuery("SELECT DISTINCT q.product FROM Questionnaire q order by q.date asc", Product.class).getResultList();
 		if(products.isEmpty()) 
 			return null;
 		return products;
