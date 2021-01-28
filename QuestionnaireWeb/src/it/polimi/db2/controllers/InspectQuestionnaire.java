@@ -17,14 +17,16 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
+import model.Accesstime;
 import model.Product;
 import model.Questionnaire;
 import model.User;
+import services.AccessTimeService;
 import services.ProductService;
 import services.QuestionnaireService;
 
 
-//TODO basically everything
+
 @WebServlet("/AdministrativeTools/InspectQuestionnaire")
 public class InspectQuestionnaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,6 +37,9 @@ public class InspectQuestionnaire extends HttpServlet {
     
 	@EJB(name = "services/QuestionnaireService")
 	QuestionnaireService questionnaireService;
+	
+	@EJB(name = "services/AccessTimeService")
+	AccessTimeService accessTimeService;
     public InspectQuestionnaire() {
         super();
         
@@ -55,14 +60,23 @@ public class InspectQuestionnaire extends HttpServlet {
 		//get all the user associated with a questionnaire
 		String productID = request.getParameter("productID");
 		Product product = productService.findProduct(Integer.parseInt(productID));
-		List<Questionnaire> questList = product.getQuestionnaires();
-		List<User> userList = new ArrayList<User>();
-		questList.forEach(quest -> userList.add(quest.getUser()));
+		
+		List<Questionnaire> questList = questionnaireService.findByProduct(product);
+		
+		List<Accesstime> accessTimeList = accessTimeService.getAbortedQuest(product.getDate());
+		List<User> abortedQuestUsers = new ArrayList<User>();
+		accessTimeList.forEach(a -> abortedQuestUsers.add(a.getUser()));
+		
+		
 		
 		//set the variable in the context
 		ServletContext servletContext = getServletContext();
 		final WebContext ctx = new WebContext(request, response, servletContext, request.getLocale());
 		ctx.setVariable("quests", questList);
+		ctx.setVariable("abortedQuestUsers", abortedQuestUsers);
+		
+		
+		
 		
 		String path;
 		path = "/html/inspectQuestionnaire.html";
@@ -77,3 +91,4 @@ public class InspectQuestionnaire extends HttpServlet {
 	}
 
 }
+ 

@@ -53,6 +53,34 @@
 			</table>
 		</div>
 		
+		<div class="row row-custom">
+			<h2 style="font-color: black" th:text="'Cancelled Questionnaire '+${quests[0].product.name} +
+													' in date ' + 
+													${#dates.format(quests[0].product.date, 'dd/MM/yyyy')}"></h2>
+		</div>
+		<div class="row row-custom">
+			<table class="table table-hover table-dark" id="cssTable">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Username</th>
+						<th scope="col">Email</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u,iter : ${abortedQuestUsers}"
+						th:id="table_row_ + ${iter}">
+						<td th:text="${iter.index}"></td>
+						<td th:text="${u.username}"></td>
+						<td th:text="${u.email}"></td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
 		</div>
 	
 </body>

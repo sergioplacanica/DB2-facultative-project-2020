@@ -51,7 +51,18 @@ public class Questionnaire implements Serializable {
 	@JoinColumn(name="UserID")
 	private User user;
 
+	public Questionnaire(int age, Date date, String exLvl, String sex, User user, Product product) {
+		this.age = age;
+		this.date = date;
+		this.expertise_level = exLvl;
+		this.sex = sex;
+		this.user = user;
+		this.product = product;
+		
+	}
+	
 	public Questionnaire() {
+		
 	}
 
 	public QuestionnairePK getId() {

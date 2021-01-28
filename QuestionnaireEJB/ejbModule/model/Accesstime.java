@@ -20,7 +20,7 @@ public class Accesstime implements Serializable {
 	private int acessTimeID;
 	
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="Access_time")
 	private Date access_time;
 
